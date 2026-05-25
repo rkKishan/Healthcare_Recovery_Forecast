@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # Frontend service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: hrf-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_BASE_URL=http://backend:8000
+      - NODE_ENV=development
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - hrf-network
+    command: npm run dev
+
+  # Backend service (Python)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: hrf-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - ENVIRONMENT=development
+    volumes:
+      - ./ml:/app/ml
+      - ./app:/app/app
+    working_dir: /app
+    networks:
+      - hrf-network
+    command: uvicorn api_server:app --reload --host 0.0.0.0 --port 8000
+
+networks:
+  hrf-network:
+    driver: bridge
+
+volumes:
+  hrf-data:

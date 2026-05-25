@@ -1,0 +1,13 @@
+{
+  "name": "healthcare-recovery-forecast",
+  "version": "1.0.0",
+  "description": "## 📋 Overview",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
