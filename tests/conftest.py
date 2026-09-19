@@ -34,6 +34,15 @@ class TestConfig(Config):
     # logs in more than five times fail for the wrong reason.
     RATELIMIT_ENABLED = False
 
+    # Config reads these from the environment, so a developer with a real
+    # .env would otherwise run a different suite from CI -- configuring
+    # Google sign-in locally made two "disabled by default" tests fail on
+    # that machine alone. Pin them; the tests that need either one configured
+    # set it explicitly on their own app.
+    GOOGLE_CLIENT_ID = ""
+    GOOGLE_ALLOWED_DOMAINS: list[str] = []
+    ASSISTANT_API_KEY = ""
+
 
 @pytest.fixture
 def app(tmp_path):

@@ -10,8 +10,13 @@ gunicorn==23.0.0
 PyJWT==2.13.0
 bcrypt==5.0.0
 Flask-Limiter==4.0.0
-# Verifies Google Sign-In ID tokens against Google's public keys
-google-auth==2.57.1
+# Verifies Google Sign-In ID tokens against Google's public keys.
+# The [requests] extra is load-bearing: google.auth.transport.requests is what
+# fetches Google's signing keys, and it needs `requests`, which google-auth
+# does not depend on otherwise. Without the extra the import fails at runtime
+# and every sign-in returns 503 -- which only showed up in CI, because a
+# leftover streamlit install was supplying `requests` locally.
+google-auth[requests]==2.57.1
 
 # Config
 python-dotenv==1.2.3
