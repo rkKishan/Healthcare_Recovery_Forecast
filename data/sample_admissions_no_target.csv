@@ -1,0 +1,41 @@
+patient_id,age,gender,admission_type,diagnosis_code,comorbidity_count,prior_admissions,department
+PT000001,89,M,Elective,DIGE,2,0,Surgery
+PT000002,45,F,Trauma,PSYC,1,1,Emergency Medicine
+PT000003,38,F,Emergency,ONCO,3,0,Surgery
+PT000004,64,F,Elective,RESP,4,3,Pulmonology
+PT000005,85,F,Trauma,RESP,0,1,Pulmonology
+PT000006,30,M,Emergency,TRMA,1,1,Surgery
+PT000007,54,M,Emergency,CIRC,2,1,Cardiology
+PT000008,46,M,Urgent,TRMA,1,0,Emergency Medicine
+PT000009,25,M,Urgent,ONCO,1,0,Oncology
+PT000010,72,M,Elective,MUSC,1,1,Orthopedics
+PT000011,58,F,Elective,RESP,3,0,Emergency Medicine
+PT000012,59,F,Trauma,RESP,1,3,Pulmonology
+PT000013,44,M,Emergency,RESP,0,0,Pulmonology
+PT000014,67,M,Emergency,MUSC,1,0,General Medicine
+PT000015,48,F,Urgent,MUSC,0,0,Orthopedics
+PT000016,55,M,Emergency,DIGE,2,0,Surgery
+PT000017,37,U,Elective,OBST,0,0,Surgery
+PT000018,35,F,Urgent,ONCO,1,0,General Medicine
+PT000019,83,F,Elective,DIGE,1,0,Surgery
+PT000020,48,F,Elective,OBST,0,1,Surgery
+PT000021,1,F,Newborn,RESP,1,0,Pulmonology
+PT000022,57,F,Emergency,CIRC,2,1,Emergency Medicine
+PT000023,50,M,Urgent,DIGE,0,0,Surgery
+PT000024,48,F,Emergency,CIRC,2,1,Cardiology
+PT000025,70,M,Trauma,CIRC,1,1,General Medicine
+PT000026,52,F,Urgent,MUSC,4,3,Surgery
+PT000027,55,M,Emergency,MUSC,0,0,Surgery
+PT000028,58,M,Emergency,PSYC,2,0,Emergency Medicine
+PT000029,80,F,Urgent,DIGE,2,2,Emergency Medicine
+PT000030,71,F,Emergency,MUSC,1,1,Surgery
+PT000031,65,M,Emergency,MUSC,1,1,Orthopedics
+PT000032,47,F,Trauma,RESP,6,1,Pulmonology
+PT000033,32,F,Elective,CIRC,1,0,General Medicine
+PT000034,76,F,Trauma,RESP,4,1,Pulmonology
+PT000035,76,F,Elective,NEUR,1,0,Neurology
+PT000036,55,F,Emergency,RESP,2,3,Pulmonology
+PT000037,68,M,Emergency,INFX,3,5,Pulmonology
+PT000038,73,M,Elective,CIRC,2,0,General Medicine
+PT000039,74,M,Urgent,TRMA,2,1,Surgery
+PT000040,76,M,Emergency,CIRC,3,2,Cardiology

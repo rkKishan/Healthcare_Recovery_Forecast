@@ -1,379 +1,382 @@
 """
-Complete ML training pipeline for healthcare recovery forecasting.
-Includes data preprocessing, feature engineering, model training, and evaluation.
+Training pipeline.
+
+Trains five algorithms for length-of-stay regression and the same five
+families for discharge-risk classification, reports comparable metrics for
+each, and persists the winners as a versioned artifact set under /models.
+
+    python -m ml.train --rows 8000
+
+The preprocessor is fitted once, on the training split only, and saved
+alongside the models so inference never re-fits.
 """
 
+from __future__ import annotations
+
+import argparse
+import json
+import platform
+from datetime import UTC, datetime
+from pathlib import Path
+from typing import Any
+
+import joblib
 import numpy as np
 import pandas as pd
-import pickle
-import warnings
-from datetime import datetime
-from typing import Tuple, Dict, Any
-
-from sklearn.preprocessing import StandardScaler, LabelEncoder
+import sklearn
+from sklearn.ensemble import (
+    GradientBoostingClassifier,
+    GradientBoostingRegressor,
+    RandomForestClassifier,
+    RandomForestRegressor,
+)
+from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.metrics import (
+    accuracy_score,
+    classification_report,
+    confusion_matrix,
+    mean_absolute_error,
+    mean_squared_error,
+    r2_score,
+)
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_absolute_error, median_absolute_error, r2_score, mean_squared_error
-import xgboost as xgb
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
+from xgboost import XGBClassifier, XGBRegressor
 
-from data_generator import generate_synthetic_data
+from .data_generator import generate_dataset
+from .preprocess import build_preprocessor, feature_names, prepare_features
+from .schema import (
+    RISK_TIER_LABELS,
+    TARGET_COLUMN,
+    los_to_risk_tier,
+    risk_tier_index,
+)
 
-warnings.filterwarnings('ignore')
+MODELS_DIR = Path(__file__).resolve().parent.parent / "models"
+RANDOM_STATE = 42
 
 
-class DataPreprocessor:
-    """Handle data cleaning, feature engineering, and preparation."""
-    
-    def __init__(self):
-        self.scaler = StandardScaler()
-        self.label_encoders = {}
-        self.feature_names = None
-        
-    def preprocess(self, df: pd.DataFrame, fit: bool = True) -> pd.DataFrame:
-        """
-        Preprocess raw patient data.
-        
-        Args:
-            df: Raw patient dataframe
-            fit: Whether to fit transformers (True for training data)
-            
-        Returns:
-            Preprocessed dataframe
-        """
-        df = df.copy()
-        
-        # Handle missing values
-        df = self._handle_missing_values(df)
-        
-        # Feature engineering
-        df = self._engineer_features(df)
-        
-        # Encode categorical variables
-        df = self._encode_categorical(df, fit=fit)
-        
-        # Remove feature columns no longer needed
-        df = df.drop(['admission_date', 'discharge_date', 'gender'], axis=1)
-        
-        # Scale numerical features
-        if fit:
-            df = self._fit_and_scale(df)
-        else:
-            df = self._scale(df)
-            
-        self.feature_names = df.columns.tolist()
-        
-        return df
-    
-    def _handle_missing_values(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Impute missing values."""
-        # Fill with median for numerical columns
-        numerical_cols = df.select_dtypes(include=[np.number]).columns
-        for col in numerical_cols:
-            if df[col].isna().any():
-                df[col].fillna(df[col].median(), inplace=True)
-        
-        # Fill with mode for categorical columns
-        categorical_cols = df.select_dtypes(include=['object']).columns
-        for col in categorical_cols:
-            if df[col].isna().any():
-                df[col].fillna(df[col].mode()[0], inplace=True)
-        
-        return df
-    
-    def _engineer_features(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Create new features from existing ones."""
-        
-        # Mean Arterial Pressure
-        df['map'] = (df['bp_systolic'] + 2 * df['bp_diastolic']) / 3
-        
-        # Pulse Pressure
-        df['pulse_pressure'] = df['bp_systolic'] - df['bp_diastolic']
-        
-        # Comorbidity count
-        comorbidity_cols = ['has_diabetes', 'has_hypertension', 'has_copd', 
-                           'has_heart_disease', 'has_kidney_disease']
-        df['comorbidity_count'] = df[comorbidity_cols].sum(axis=1)
-        
-        # Clinical risk score (composite)
-        df['clinical_risk'] = (
-            (df['white_blood_cells'] > 12).astype(int) +
-            (df['heart_rate'] > 100).astype(int) +
-            (df['temperature'] > 38).astype(int) +
-            (df['respiratory_rate'] > 20).astype(int) +
-            (df['creatinine'] > 1.5).astype(int)
+# --------------------------------------------------------------------------
+# Model definitions
+# --------------------------------------------------------------------------
+
+def regressors() -> dict[str, Any]:
+    return {
+        "Linear Regression": LinearRegression(),
+        "Decision Tree": DecisionTreeRegressor(
+            max_depth=12, min_samples_leaf=8, random_state=RANDOM_STATE
+        ),
+        "Random Forest": RandomForestRegressor(
+            n_estimators=400, max_depth=None, min_samples_leaf=2,
+            n_jobs=-1, random_state=RANDOM_STATE
+        ),
+        "Gradient Boosting": GradientBoostingRegressor(
+            n_estimators=400, learning_rate=0.05, max_depth=4,
+            subsample=0.9, random_state=RANDOM_STATE
+        ),
+        "XGBoost": XGBRegressor(
+            n_estimators=600, learning_rate=0.05, max_depth=6,
+            subsample=0.9, colsample_bytree=0.9, reg_lambda=1.0,
+            objective="reg:squarederror", n_jobs=-1,
+            random_state=RANDOM_STATE, verbosity=0
+        ),
+    }
+
+
+def classifiers() -> dict[str, Any]:
+    # Logistic Regression stands in for Linear Regression on the
+    # classification task -- the same linear family, appropriate link function.
+    return {
+        # Multinomial is the default and only mode as of scikit-learn 1.9.
+        "Logistic Regression": LogisticRegression(
+            max_iter=2000, random_state=RANDOM_STATE
+        ),
+        "Decision Tree": DecisionTreeClassifier(
+            max_depth=12, min_samples_leaf=8, random_state=RANDOM_STATE
+        ),
+        "Random Forest": RandomForestClassifier(
+            n_estimators=400, min_samples_leaf=2, n_jobs=-1,
+            random_state=RANDOM_STATE
+        ),
+        "Gradient Boosting": GradientBoostingClassifier(
+            n_estimators=250, learning_rate=0.08, max_depth=4,
+            subsample=0.9, random_state=RANDOM_STATE
+        ),
+        "XGBoost": XGBClassifier(
+            n_estimators=500, learning_rate=0.06, max_depth=6,
+            subsample=0.9, colsample_bytree=0.9,
+            objective="multi:softprob", num_class=len(RISK_TIER_LABELS),
+            n_jobs=-1, random_state=RANDOM_STATE, verbosity=0
+        ),
+    }
+
+
+# --------------------------------------------------------------------------
+# Training
+# --------------------------------------------------------------------------
+
+def train(frame: pd.DataFrame, test_size: float = 0.2,
+          verbose: bool = True) -> dict[str, Any]:
+    """Train both tasks on `frame` and return artifacts plus a metrics report."""
+    if TARGET_COLUMN not in frame.columns:
+        raise ValueError(
+            f"Training data must contain the '{TARGET_COLUMN}' column."
         )
-        
-        # BMI category risk
-        df['bmi_risk'] = pd.cut(df['bmi'], bins=[0, 18.5, 25, 30, 35, 100],
-                                labels=[1, 2, 3, 4, 5], ordered=False).astype(int)
-        
-        # Age groups
-        df['age_group'] = pd.cut(df['age'], bins=[0, 30, 50, 70, 100],
-                                 labels=[1, 2, 3, 4]).astype(int)
-        
-        # Glucose risk
-        df['glucose_risk'] = pd.cut(df['glucose'], bins=[0, 100, 126, 200, 400],
-                                    labels=[1, 2, 3, 4]).astype(int)
-        
-        # Hemoglobin risk
-        df['hemoglobin_risk'] = pd.cut(df['hemoglobin'], bins=[0, 7, 9, 12, 20],
-                                       labels=[4, 3, 2, 1]).astype(int)
-        
-        return df
-    
-    def _encode_categorical(self, df: pd.DataFrame, fit: bool = True) -> pd.DataFrame:
-        """Encode categorical variables."""
-        if fit:
-            # Gender encoding
-            if 'gender' in df.columns:
-                self.label_encoders['gender'] = LabelEncoder()
-                df['gender_encoded'] = self.label_encoders['gender'].fit_transform(df['gender'])
-        else:
-            if 'gender' in df.columns:
-                df['gender_encoded'] = self.label_encoders['gender'].transform(df['gender'])
-        
-        return df
-    
-    def _fit_and_scale(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Fit scaler and transform numerical features."""
-        numerical_cols = df.select_dtypes(include=[np.number]).columns.tolist()
-        # Exclude target variable if present
-        if 'los_actual' in numerical_cols:
-            numerical_cols.remove('los_actual')
-        if 'severity_level' in numerical_cols:
-            numerical_cols.remove('severity_level')
-            
-        df[numerical_cols] = self.scaler.fit_transform(df[numerical_cols])
-        return df
-    
-    def _scale(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Transform numerical features using fitted scaler."""
-        numerical_cols = df.select_dtypes(include=[np.number]).columns.tolist()
-        if 'los_actual' in numerical_cols:
-            numerical_cols.remove('los_actual')
-        if 'severity_level' in numerical_cols:
-            numerical_cols.remove('severity_level')
-            
-        df[numerical_cols] = self.scaler.transform(df[numerical_cols])
-        return df
+
+    frame = frame.dropna(subset=[TARGET_COLUMN]).reset_index(drop=True)
+
+    X_raw = prepare_features(frame)
+    y_los = frame[TARGET_COLUMN].astype(float).to_numpy()
+    y_tier = np.array([risk_tier_index(los_to_risk_tier(v)) for v in y_los])
+
+    X_train_raw, X_test_raw, y_los_train, y_los_test, y_tier_train, y_tier_test = (
+        train_test_split(
+            X_raw, y_los, y_tier,
+            test_size=test_size, random_state=RANDOM_STATE, stratify=y_tier,
+        )
+    )
+
+    # Fit the preprocessor once, on training data only.
+    preprocessor = build_preprocessor()
+    X_train = preprocessor.fit_transform(X_train_raw)
+    X_test = preprocessor.transform(X_test_raw)
+    names = feature_names(preprocessor)
+
+    if verbose:
+        _banner("Data")
+        print(f"  Records           {len(frame):,}")
+        print(f"  Train / test      {len(X_train):,} / {len(X_test):,}")
+        print(f"  Encoded features  {len(names)}")
+        print(f"  Mean LOS          {y_los.mean():.2f} days "
+              f"(sd {y_los.std():.2f})")
+
+    reg_results, best_reg_name, best_reg = _train_regressors(
+        X_train, y_los_train, X_test, y_los_test, verbose
+    )
+    clf_results, best_clf_name, best_clf, clf_detail = _train_classifiers(
+        X_train, y_tier_train, X_test, y_tier_test, verbose
+    )
+
+    return {
+        "preprocessor": preprocessor,
+        "regressor": best_reg,
+        "classifier": best_clf,
+        "feature_names": names,
+        "metrics": {
+            "regression": reg_results,
+            "classification": clf_results,
+            "best_regressor": best_reg_name,
+            "best_classifier": best_clf_name,
+            "classification_detail": clf_detail,
+        },
+        "training_rows": int(len(frame)),
+        "test_rows": int(len(X_test)),
+        # Background sample for the SHAP explainer, kept small so that
+        # explanations stay inside the 2s latency budget.
+        "background": X_train[
+            np.random.default_rng(RANDOM_STATE).choice(
+                len(X_train), size=min(200, len(X_train)), replace=False
+            )
+        ],
+    }
 
 
-class RecoveryModelTrainer:
-    """Train and evaluate recovery prediction models."""
-    
-    def __init__(self, random_state: int = 42):
-        self.random_state = random_state
-        self.xgb_model = None
-        self.rf_model = None
-        self.preprocessor = None
-        self.metrics = {}
-        
-    def prepare_data(self, df: pd.DataFrame, test_size: float = 0.2) -> Tuple:
-        """Prepare data for training."""
-        self.preprocessor = DataPreprocessor()
-        
-        # Preprocess
-        df_processed = self.preprocessor.preprocess(df, fit=True)
-        
-        # Separate features and target
-        X = df_processed.drop(['los_actual', 'severity_level'], axis=1)
-        y = df_processed['los_actual']
-        
-        # Train-test split
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=test_size, random_state=self.random_state
-        )
-        
-        return X_train, X_test, y_train, y_test, X.columns.tolist()
-    
-    def train_xgboost(self, X_train: np.ndarray, y_train: np.ndarray) -> None:
-        """Train XGBoost regressor optimized for healthcare data."""
-        print("Training XGBoost model...")
-        
-        self.xgb_model = xgb.XGBRegressor(
-            n_estimators=200,
-            max_depth=6,
-            learning_rate=0.05,
-            subsample=0.8,
-            colsample_bytree=0.8,
-            objective='reg:squarederror',  # Absolute error for robustness
-            random_state=self.random_state,
-            verbosity=0,
-            enable_categorical=False
-        )
-        
-        self.xgb_model.fit(
-            X_train, y_train,
-            eval_set=[(X_train, y_train)],
-            verbose=False
-        )
-        
-        print("✓ XGBoost training complete")
-    
-    def train_random_forest(self, X_train: np.ndarray, y_train: np.ndarray) -> None:
-        """Train Random Forest regressor."""
-        print("Training Random Forest model...")
-        
-        self.rf_model = RandomForestRegressor(
-            n_estimators=100,
-            max_depth=15,
-            min_samples_split=5,
-            min_samples_leaf=2,
-            random_state=self.random_state,
-            n_jobs=-1
-        )
-        
-        self.rf_model.fit(X_train, y_train)
-        print("✓ Random Forest training complete")
-    
-    def evaluate_models(self, X_test: np.ndarray, y_test: np.ndarray, 
-                       feature_names: list) -> Dict[str, Dict]:
-        """Evaluate both models using appropriate metrics for healthcare."""
-        results = {}
-        
-        # XGBoost evaluation
-        if self.xgb_model:
-            y_pred_xgb = self.xgb_model.predict(X_test)
-            results['xgboost'] = {
-                'mae': mean_absolute_error(y_test, y_pred_xgb),
-                'median_ae': median_absolute_error(y_test, y_pred_xgb),
-                'rmse': np.sqrt(mean_squared_error(y_test, y_pred_xgb)),
-                'r2': r2_score(y_test, y_pred_xgb),
-                'predictions': y_pred_xgb,
-            }
-            
-            print(f"\nXGBoost Model Performance:")
-            print(f"  MAE:  {results['xgboost']['mae']:.2f} days")
-            print(f"  Median AE: {results['xgboost']['median_ae']:.2f} days")
-            print(f"  RMSE: {results['xgboost']['rmse']:.2f} days")
-            print(f"  R²:   {results['xgboost']['r2']:.4f}")
-        
-        # Random Forest evaluation
-        if self.rf_model:
-            y_pred_rf = self.rf_model.predict(X_test)
-            results['random_forest'] = {
-                'mae': mean_absolute_error(y_test, y_pred_rf),
-                'median_ae': median_absolute_error(y_test, y_pred_rf),
-                'rmse': np.sqrt(mean_squared_error(y_test, y_pred_rf)),
-                'r2': r2_score(y_test, y_pred_rf),
-                'predictions': y_pred_rf,
-            }
-            
-            print(f"\nRandom Forest Model Performance:")
-            print(f"  MAE:  {results['random_forest']['mae']:.2f} days")
-            print(f"  Median AE: {results['random_forest']['median_ae']:.2f} days")
-            print(f"  RMSE: {results['random_forest']['rmse']:.2f} days")
-            print(f"  R²:   {results['random_forest']['r2']:.4f}")
-        
-        self.metrics = results
-        return results
-    
-    def get_feature_importance(self, feature_names: list) -> pd.DataFrame:
-        """Extract feature importance from both models."""
-        importance_dfs = []
-        
-        if self.xgb_model:
-            xgb_importance = pd.DataFrame({
-                'feature': feature_names,
-                'importance': self.xgb_model.feature_importances_,
-                'model': 'XGBoost'
-            }).sort_values('importance', ascending=False)
-            importance_dfs.append(xgb_importance)
-        
-        if self.rf_model:
-            rf_importance = pd.DataFrame({
-                'feature': feature_names,
-                'importance': self.rf_model.feature_importances_,
-                'model': 'Random Forest'
-            }).sort_values('importance', ascending=False)
-            importance_dfs.append(rf_importance)
-        
-        return pd.concat(importance_dfs, ignore_index=True) if importance_dfs else pd.DataFrame()
-    
-    def save_models(self, output_dir: str = './') -> None:
-        """Save trained models and preprocessor."""
-        print(f"\nSaving models to {output_dir}...")
-        
-        if self.xgb_model:
-            self.xgb_model.save_model(f'{output_dir}/xgboost_model.json')
-        
-        if self.rf_model:
-            with open(f'{output_dir}/random_forest_model.pkl', 'wb') as f:
-                pickle.dump(self.rf_model, f)
-        
-        with open(f'{output_dir}/preprocessor.pkl', 'wb') as f:
-            pickle.dump(self.preprocessor, f)
-        
-        print("✓ Models saved successfully")
-    
-    def load_models(self, model_dir: str = './') -> None:
-        """Load previously trained models."""
-        try:
-            self.xgb_model = xgb.XGBRegressor()
-            self.xgb_model.load_model(f'{model_dir}/xgboost_model.json')
-            
-            with open(f'{model_dir}/random_forest_model.pkl', 'rb') as f:
-                self.rf_model = pickle.load(f)
-            
-            with open(f'{model_dir}/preprocessor.pkl', 'rb') as f:
-                self.preprocessor = pickle.load(f)
-                
-            print("✓ Models loaded successfully")
-        except FileNotFoundError as e:
-            print(f"Error loading models: {e}")
+def _train_regressors(X_train, y_train, X_test, y_test, verbose):
+    results = {}
+    fitted = {}
+
+    if verbose:
+        _banner("Length-of-stay regression")
+        print(f"  {'Model':<22}{'RMSE':>9}{'MAE':>9}{'R2':>9}")
+        print("  " + "-" * 49)
+
+    for name, model in regressors().items():
+        model.fit(X_train, y_train)
+        pred = model.predict(X_test)
+        rmse = float(np.sqrt(mean_squared_error(y_test, pred)))
+        results[name] = {
+            "rmse": round(rmse, 4),
+            "mae": round(float(mean_absolute_error(y_test, pred)), 4),
+            "r2": round(float(r2_score(y_test, pred)), 4),
+        }
+        fitted[name] = model
+        if verbose:
+            r = results[name]
+            print(f"  {name:<22}{r['rmse']:>9.3f}{r['mae']:>9.3f}{r['r2']:>9.4f}")
+
+    best = min(results, key=lambda n: results[n]["rmse"])
+    if verbose:
+        print(f"\n  Selected: {best} (RMSE {results[best]['rmse']:.3f} days)")
+    return results, best, fitted[best]
 
 
-def main():
-    """Complete training pipeline."""
+def _train_classifiers(X_train, y_train, X_test, y_test, verbose):
+    results = {}
+    fitted = {}
+    detail = {}
+
+    if verbose:
+        _banner("Discharge-risk tier classification")
+        print(f"  {'Model':<22}{'Accuracy':>10}{'Macro F1':>10}"
+              f"{'Weighted F1':>13}")
+        print("  " + "-" * 55)
+
+    present = sorted(set(y_train) | set(y_test))
+    target_names = [RISK_TIER_LABELS[i] for i in present]
+
+    for name, model in classifiers().items():
+        model.fit(X_train, y_train)
+        pred = model.predict(X_test)
+        report = classification_report(
+            y_test, pred, labels=present, target_names=target_names,
+            output_dict=True, zero_division=0,
+        )
+        results[name] = {
+            "accuracy": round(float(accuracy_score(y_test, pred)), 4),
+            "macro_f1": round(float(report["macro avg"]["f1-score"]), 4),
+            "weighted_f1": round(float(report["weighted avg"]["f1-score"]), 4),
+        }
+        detail[name] = {
+            "per_tier": {
+                tier: {
+                    "precision": round(report[tier]["precision"], 4),
+                    "recall": round(report[tier]["recall"], 4),
+                    "f1": round(report[tier]["f1-score"], 4),
+                    "support": int(report[tier]["support"]),
+                }
+                for tier in target_names
+            },
+            "confusion_matrix": confusion_matrix(
+                y_test, pred, labels=present
+            ).tolist(),
+            "labels": target_names,
+        }
+        fitted[name] = model
+        if verbose:
+            r = results[name]
+            print(f"  {name:<22}{r['accuracy']:>10.4f}{r['macro_f1']:>10.4f}"
+                  f"{r['weighted_f1']:>13.4f}")
+
+    best = min(
+        results,
+        key=lambda n: (-results[n]["accuracy"], -results[n]["macro_f1"]),
+    )
+    if verbose:
+        print(f"\n  Selected: {best} (accuracy {results[best]['accuracy']:.2%})")
+        _print_confusion(detail[best])
+    return results, best, fitted[best], detail
+
+
+def _print_confusion(detail: dict) -> None:
+    labels = detail["labels"]
+    matrix = detail["confusion_matrix"]
+    width = max(len(x) for x in labels) + 2
+
+    print("\n  Confusion matrix (rows = actual, columns = predicted)")
+    header = " " * (width + 2) + "".join(f"{name[:9]:>11}" for name in labels)
+    print(header)
+    for label, row in zip(labels, matrix, strict=False):
+        cells = "".join(f"{v:>11,}" for v in row)
+        print(f"  {label:<{width}}{cells}")
+
+    print(f"\n  {'Tier':<{width}}{'Precision':>11}{'Recall':>9}{'F1':>9}{'Support':>10}")
+    for tier, stats in detail["per_tier"].items():
+        print(f"  {tier:<{width}}{stats['precision']:>11.3f}"
+              f"{stats['recall']:>9.3f}{stats['f1']:>9.3f}{stats['support']:>10,}")
+
+
+def _banner(title: str) -> None:
+    print(f"\n{title}")
     print("=" * 60)
-    print("Healthcare Recovery Forecasting - Training Pipeline")
-    print("=" * 60)
-    
-    # Generate synthetic data
-    print("\n1. Generating synthetic patient data...")
-    df = generate_synthetic_data(n_samples=2000, random_state=42)
-    print(f"✓ Generated {len(df)} patient records")
-    
-    # Initialize trainer
-    trainer = RecoveryModelTrainer(random_state=42)
-    
-    # Prepare data
-    print("\n2. Preprocessing and preparing data...")
-    X_train, X_test, y_train, y_test, feature_names = trainer.prepare_data(df)
-    print(f"✓ Training set: {X_train.shape}")
-    print(f"✓ Test set: {X_test.shape}")
-    
-    # Train models
-    print("\n3. Training models...")
-    trainer.train_xgboost(X_train, y_train)
-    trainer.train_random_forest(X_train, y_train)
-    
-    # Evaluate models
-    print("\n4. Evaluating models...")
-    metrics = trainer.evaluate_models(X_test, y_test, feature_names)
-    
-    # Feature importance
-    print("\n5. Feature Importance (Top 10)")
-    importance_df = trainer.get_feature_importance(feature_names)
-    print(importance_df.groupby('model').head(10).to_string(index=False))
-    
-    # Save models
-    print("\n6. Saving models...")
-    trainer.save_models(output_dir='./')
-    
-    # Save test data for later evaluation
-    test_data = pd.DataFrame(X_test, columns=feature_names)
-    test_data['y_actual'] = y_test.values
-    test_data['y_pred_xgb'] = metrics['xgboost']['predictions']
-    test_data['y_pred_rf'] = metrics['random_forest']['predictions']
-    test_data.to_csv('test_predictions.csv', index=False)
-    
-    print("\n" + "=" * 60)
-    print("Training pipeline complete!")
-    print("=" * 60)
-    
-    return trainer, X_train, X_test, y_train, y_test, feature_names
 
 
-if __name__ == '__main__':
-    trainer, X_train, X_test, y_train, y_test, feature_names = main()
+# --------------------------------------------------------------------------
+# Persistence
+# --------------------------------------------------------------------------
+
+def save_artifacts(artifacts: dict[str, Any], models_dir: Path = MODELS_DIR,
+                   source: str = "synthetic") -> str:
+    """
+    Write a versioned artifact set and mark it as current.
+
+    Layout:
+        models/latest.json                     -> {"version": "..."}
+        models/<version>/preprocessor.pkl
+        models/<version>/regressor.pkl
+        models/<version>/classifier.pkl
+        models/<version>/background.pkl
+        models/<version>/metadata.json
+    """
+    version = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
+    target = models_dir / version
+    target.mkdir(parents=True, exist_ok=True)
+
+    joblib.dump(artifacts["preprocessor"], target / "preprocessor.pkl")
+    joblib.dump(artifacts["regressor"], target / "regressor.pkl")
+    joblib.dump(artifacts["classifier"], target / "classifier.pkl")
+    joblib.dump(artifacts["background"], target / "background.pkl")
+
+    metadata = {
+        "version": version,
+        "trained_at": datetime.now(UTC).isoformat(),
+        "data_source": source,
+        "training_rows": artifacts["training_rows"],
+        "test_rows": artifacts["test_rows"],
+        "feature_names": artifacts["feature_names"],
+        "risk_tiers": RISK_TIER_LABELS,
+        "metrics": artifacts["metrics"],
+        "environment": {
+            "python": platform.python_version(),
+            "scikit_learn": sklearn.__version__,
+            "numpy": np.__version__,
+            "pandas": pd.__version__,
+        },
+    }
+    (target / "metadata.json").write_text(json.dumps(metadata, indent=2))
+    (models_dir / "latest.json").write_text(json.dumps({"version": version}, indent=2))
+
+    return version
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Train LOS and risk-tier models.")
+    parser.add_argument("--rows", type=int, default=8000,
+                        help="Synthetic rows to generate when no --data is given.")
+    parser.add_argument("--data", type=str, default=None,
+                        help="Path to a CSV/Excel training file.")
+    parser.add_argument("--seed", type=int, default=RANDOM_STATE)
+    parser.add_argument("--test-size", type=float, default=0.2)
+    args = parser.parse_args()
+
+    if args.data:
+        path = Path(args.data)
+        frame = (pd.read_excel(path) if path.suffix in {".xlsx", ".xls"}
+                 else pd.read_csv(path))
+        frame.columns = [str(c).strip().lower().replace(" ", "_")
+                         for c in frame.columns]
+        source = str(path)
+        print(f"Training on {path} ({len(frame):,} rows)")
+    else:
+        frame = generate_dataset(args.rows, args.seed)
+        source = f"synthetic (rows={args.rows}, seed={args.seed})"
+        print(f"Training on {args.rows:,} synthetic admissions")
+
+    artifacts = train(frame, test_size=args.test_size)
+    version = save_artifacts(artifacts, source=source)
+
+    metrics = artifacts["metrics"]
+    best_reg = metrics["regression"][metrics["best_regressor"]]
+    best_clf = metrics["classification"][metrics["best_classifier"]]
+
+    _banner("Saved")
+    print(f"  Version           {version}")
+    print(f"  Location          models/{version}/")
+    print(f"  LOS model         {metrics['best_regressor']} "
+          f"(RMSE {best_reg['rmse']:.3f} d, R2 {best_reg['r2']:.4f})")
+    print(f"  Risk model        {metrics['best_classifier']} "
+          f"(accuracy {best_clf['accuracy']:.2%})")
+    print()
+
+
+if __name__ == "__main__":
+    main()

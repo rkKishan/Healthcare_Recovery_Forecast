@@ -1,8 +1,0 @@
-import { defineConfig } from 'ts-node'
-
-export default defineConfig({
-  compilerOptions: {
-    module: 'commonjs',
-  },
-  esm: false,
-})

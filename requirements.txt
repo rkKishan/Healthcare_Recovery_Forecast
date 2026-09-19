@@ -1,20 +1,36 @@
-streamlit
-pandas
-numpy
-scikit-learn
-xgboost
-matplotlib
-shap
-reportlab
-fastapi
-uvicorn[standard]
-python-multipart
-seaborn
-Pillow
-sqlalchemy
-psycopg2-binary
-alembic
-pydantic-settings
-pyjwt
-bcrypt
-python-dotenv
+# Web layer
+Flask==3.1.3
+Flask-Cors==6.0.5
+Flask-SQLAlchemy==3.1.1
+Flask-Migrate==4.1.0
+SQLAlchemy==2.0.52
+gunicorn==23.0.0
+
+# Auth
+PyJWT==2.13.0
+bcrypt==5.0.0
+Flask-Limiter==4.0.0
+# Verifies Google Sign-In ID tokens against Google's public keys
+google-auth==2.57.1
+
+# Config
+python-dotenv==1.2.3
+
+# Data & ML
+pandas==3.0.5
+numpy==2.4.6
+scikit-learn==1.9.0
+xgboost==3.2.0
+shap==0.51.0
+joblib==1.6.0
+
+# Excel upload support
+openpyxl==3.1.5
+
+# PDF reports (matplotlib renders the charts, reportlab lays out the pages)
+reportlab==5.0.1
+matplotlib==3.11.1
+
+# MySQL driver — only needed when DATABASE_URL points at MySQL
+PyMySQL==1.2.0
+groq>=1.7,<2

@@ -1,48 +1,47 @@
-version: '3.8'
-
 services:
-  # Frontend service
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: hrf-frontend
+  api:
+    build: .
     ports:
-      - "3000:3000"
+      - "2800:2800"
     environment:
-      - NEXT_PUBLIC_API_BASE_URL=http://backend:8000
-      - NODE_ENV=development
+      # Swap to MySQL by uncommenting the DATABASE_URL below and the
+      # depends_on block; SQLite is the zero-setup default.
+      # DATABASE_URL: mysql+pymysql://forecast:forecast@db:3306/healthcare_forecast
+      # No fallback on purpose: the app runs with FLASK_DEBUG=false here and
+      # refuses to boot on a placeholder key, so compose should fail first
+      # with a message you can act on.
+      SECRET_KEY: ${SECRET_KEY:?set SECRET_KEY, e.g. export SECRET_KEY=$(python -c "import secrets;print(secrets.token_hex(32))")}
+      CORS_ORIGINS: http://localhost:9000,http://localhost:8080
+      # Google Sign-In. Blank (the default) hides the button and leaves
+      # password login as the only route in; no client secret is involved.
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_ALLOWED_DOMAINS: ${GOOGLE_ALLOWED_DOMAINS:-}
+      TOTAL_BEDS: 0
+      FLASK_DEBUG: "false"
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    depends_on:
-      - backend
-    networks:
-      - hrf-network
-    command: npm run dev
+      - uploads:/app/data
+    # depends_on:
+    #   db:
+    #     condition: service_healthy
 
-  # Backend service (Python)
-  backend:
-    build:
-      context: .
-      dockerfile: Dockerfile.backend
-    container_name: hrf-backend
+  db:
+    image: mysql:8.4
+    profiles: ["mysql"]
+    environment:
+      MYSQL_DATABASE: healthcare_forecast
+      MYSQL_USER: forecast
+      MYSQL_PASSWORD: forecast
+      MYSQL_ROOT_PASSWORD: rootpassword
     ports:
-      - "8000:8000"
-    environment:
-      - PYTHONUNBUFFERED=1
-      - ENVIRONMENT=development
+      - "3306:3306"
     volumes:
-      - ./ml:/app/ml
-      - ./app:/app/app
-    working_dir: /app
-    networks:
-      - hrf-network
-    command: uvicorn api_server:app --reload --host 0.0.0.0 --port 8000
-
-networks:
-  hrf-network:
-    driver: bridge
+      - mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-prootpassword"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
 
 volumes:
-  hrf-data:
+  uploads:
+  mysql:

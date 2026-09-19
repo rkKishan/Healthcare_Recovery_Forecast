@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Environment — never commit real secrets
+.env
+
+# Test & lint caches
+.pytest_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Data & models: regenerate with `python -m ml.train`
+models/
+data/uploads/
+data/*.db
+data/app.db
+data/*.backup-*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/
+
+# Stray copies some tools create alongside the real one
+node_modules */
+"node_modules 2"/

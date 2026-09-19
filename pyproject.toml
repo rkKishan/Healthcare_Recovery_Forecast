@@ -1,0 +1,43 @@
+[project]
+name = "healthcare-recovery-forecast"
+version = "1.0.0"
+description = "Length-of-stay forecasting and bed capacity planning for hospital admissions"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q --strict-markers"
+filterwarnings = [
+    "ignore::PendingDeprecationWarning",
+    # SHAP and its plotting stack are noisy on import; the warnings are not ours.
+    "ignore:.*set_bad.*:UserWarning",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = [".venv", "frontend", "models", "data", "migrations"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle
+    "F",    # pyflakes
+    "I",    # import sorting
+    "B",    # bugbear: likely bugs, not style
+    "UP",   # pyupgrade
+    "C4",   # comprehension clarity
+    "SIM",  # simplifiable constructs
+]
+ignore = [
+    "E501",  # line length is handled by the formatter, not the linter
+    "B008",  # Flask/SQLAlchemy idioms rely on calls in defaults
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests import fixtures that look unused, and re-import inside functions to
+# keep app context handling explicit.
+"tests/*" = ["F811", "B018"]
+# The app factory imports after a sys.path insert, which is deliberate.
+"backend/app.py" = ["E402"]
+"tests/conftest.py" = ["E402"]

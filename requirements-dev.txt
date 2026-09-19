@@ -1,0 +1,7 @@
+# Development and CI tooling. Install with:
+#   pip install -r requirements.txt -r requirements-dev.txt
+-r requirements.txt
+
+pytest==8.3.4
+pypdf==6.17.0  # asserts on generated PDF reports
+ruff==0.9.6

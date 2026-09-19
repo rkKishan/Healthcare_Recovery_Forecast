@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Recovery Forecast</title>
+    <meta
+      name="description"
+      content="Recovery Forecast predicts hospital length of stay and discharge risk, so ward teams can plan discharges and analysts can forecast bed capacity."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Matches --page in styles.css for each theme, so the browser chrome
+         does not sit a shade apart from the app on mobile. -->
+    <meta name="theme-color" content="#f5f7f6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f1114" media="(prefers-color-scheme: dark)" />
+
+    <!--
+      Theme has to be resolved before the first paint.
+
+      React sets data-theme from an effect, which runs after the browser has
+      already painted :root's light default -- a dark-mode user got a white
+      flash on every load. This blocking script stamps the attribute (and the
+      ground colour, for the moment in dev before the stylesheet arrives)
+      first, and ThemeContext reads back what it decided instead of running
+      the same guess a second time.
+
+      Keep the storage key and the fallback order in step with
+      src/context/ThemeContext.jsx.
+    -->
+    <script>
+      (function () {
+        var theme = 'light'
+        try {
+          var stored = localStorage.getItem('hrf.theme')
+          if (stored === 'light' || stored === 'dark') {
+            theme = stored
+          } else if (
+            window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches
+          ) {
+            theme = 'dark'
+          }
+        } catch (e) {
+          /* private browsing: fall through to the light default */
+        }
+        var root = document.documentElement
+        root.setAttribute('data-theme', theme)
+        root.style.colorScheme = theme
+        root.style.backgroundColor = theme === 'dark' ? '#0f1114' : '#f5f7f6'
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

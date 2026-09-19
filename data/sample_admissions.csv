@@ -1,0 +1,1201 @@
+patient_id,age,gender,admission_type,diagnosis_code,comorbidity_count,prior_admissions,department,length_of_stay
+PT000001,46,M,Emergency,ONCO,0,0,Oncology,20.1
+PT000002,46,M,Emergency,MUSC,1,0,General Medicine,7.0
+PT000003,46,F,Emergency,TRMA,3,2,Emergency Medicine,15.3
+PT000004,45,M,Trauma,NEUR,2,0,General Medicine,20.0
+PT000005,34,F,Emergency,CIRC,3,0,Cardiology,13.8
+PT000006,29,M,Urgent,OBST,0,0,Surgery,3.0
+PT000007,54,M,Emergency,ONCO,3,1,Oncology,30.5
+PT000008,47,M,Urgent,ONCO,1,0,Oncology,20.7
+PT000009,79,M,Urgent,CIRC,2,0,Cardiology,13.5
+PT000010,64,M,Trauma,MUSC,0,0,Orthopedics,5.3
+PT000011,63,F,Emergency,INFX,0,0,General Medicine,11.6
+PT000012,0,M,Newborn,PSYC,1,2,Neurology,9.9
+PT000013,56,F,Urgent,NEUR,4,2,Neurology,26.4
+PT000014,65,F,Emergency,TRMA,4,0,Emergency Medicine,18.1
+PT000015,72,F,Emergency,MUSC,2,2,Surgery,11.4
+PT000016,56,F,Elective,RESP,2,1,Pulmonology,7.4
+PT000017,79,M,Elective,DIGE,2,0,Surgery,5.2
+PT000018,58,M,Emergency,CIRC,2,1,General Medicine,14.0
+PT000019,73,M,Elective,TRMA,3,0,Emergency Medicine,10.0
+PT000020,49,F,Trauma,DIGE,2,0,General Medicine,8.1
+PT000021,24,F,Elective,ONCO,1,1,Oncology,13.1
+PT000022,63,M,Elective,INFX,3,3,Pulmonology,12.1
+PT000023,72,M,Emergency,OBST,4,1,Surgery,7.9
+PT000024,69,F,Elective,PSYC,1,2,Emergency Medicine,10.9
+PT000025,66,F,Trauma,ONCO,3,2,General Medicine,29.5
+PT000026,51,F,Emergency,RESP,1,3,Pulmonology,11.2
+PT000027,43,F,Elective,MUSC,2,0,Orthopedics,3.6
+PT000028,68,F,Emergency,CIRC,2,3,General Medicine,14.1
+PT000029,66,F,Emergency,CIRC,2,0,Cardiology,14.6
+PT000030,47,M,Emergency,NEUR,2,0,Neurology,21.5
+PT000031,79,M,Emergency,ONCO,2,1,Oncology,31.3
+PT000032,41,F,Emergency,OBST,3,2,Surgery,6.2
+PT000033,47,F,Emergency,INFX,2,1,Pulmonology,16.5
+PT000034,89,M,Urgent,INFX,2,0,Emergency Medicine,13.9
+PT000035,75,F,Emergency,MUSC,1,1,Surgery,8.6
+PT000036,0,M,Newborn,RESP,0,0,Pulmonology,3.3
+PT000037,63,F,Emergency,CIRC,0,0,Cardiology,11.4
+PT000038,61,M,Emergency,MUSC,2,0,Surgery,8.6
+PT000039,6,F,Urgent,RESP,1,2,Pulmonology,8.1
+PT000040,41,F,Emergency,NEUR,2,1,Neurology,22.0
+PT000041,1,M,Newborn,MUSC,1,1,Surgery,2.4
+PT000042,51,M,Elective,TRMA,2,1,Emergency Medicine,8.4
+PT000043,63,F,Elective,NEUR,2,1,General Medicine,11.6
+PT000044,79,M,Emergency,INFX,0,1,Emergency Medicine,11.2
+PT000045,52,M,Emergency,TRMA,0,1,Surgery,13.3
+PT000046,38,F,Emergency,ONCO,0,1,General Medicine,15.3
+PT000047,64,M,Elective,INFX,2,0,Emergency Medicine,8.5
+PT000048,52,M,Urgent,RESP,1,0,Pulmonology,9.7
+PT000049,55,M,Emergency,NEUR,2,2,Neurology,24.8
+PT000050,52,F,Emergency,CIRC,1,0,General Medicine,10.3
+PT000051,100,M,Emergency,RESP,3,1,Pulmonology,18.3
+PT000052,15,M,Emergency,CIRC,0,0,Cardiology,9.0
+PT000053,51,M,Emergency,ONCO,3,2,Oncology,32.0
+PT000054,58,M,Emergency,NEUR,4,3,General Medicine,25.0
+PT000055,43,M,Emergency,NEUR,1,2,General Medicine,15.6
+PT000056,75,M,Emergency,ONCO,3,0,Oncology,33.4
+PT000057,73,M,Emergency,MUSC,2,3,Orthopedics,9.5
+PT000058,57,M,Elective,DIGE,2,3,Surgery,5.9
+PT000059,53,F,Urgent,CIRC,1,0,Cardiology,10.8
+PT000060,56,M,Emergency,CIRC,2,2,Cardiology,15.5
+PT000061,56,M,Trauma,NEUR,3,3,Neurology,32.1
+PT000062,57,F,Emergency,MUSC,2,1,Orthopedics,7.9
+PT000063,54,F,Elective,DIGE,3,2,Emergency Medicine,4.5
+PT000064,63,F,Emergency,ONCO,1,0,General Medicine,18.4
+PT000065,72,M,Elective,DIGE,2,1,Surgery,6.6
+PT000066,35,M,Emergency,DIGE,2,1,General Medicine,7.5
+PT000067,38,M,Emergency,DIGE,2,1,General Medicine,7.5
+PT000068,25,M,Emergency,RESP,1,1,General Medicine,9.1
+PT000069,74,M,Emergency,CIRC,1,0,General Medicine,11.9
+PT000070,63,F,Urgent,MUSC,0,0,Surgery,5.8
+PT000071,68,M,Urgent,RESP,1,2,Pulmonology,10.1
+PT000072,31,F,Trauma,INFX,1,2,General Medicine,15.1
+PT000073,92,M,Emergency,TRMA,2,2,Emergency Medicine,18.0
+PT000074,46,M,Emergency,RESP,2,1,Emergency Medicine,8.7
+PT000075,61,F,Urgent,CIRC,2,1,General Medicine,11.6
+PT000076,74,F,Elective,RESP,4,3,General Medicine,11.1
+PT000077,39,M,Elective,RESP,0,1,Pulmonology,5.2
+PT000078,48,F,Elective,NEUR,2,1,Neurology,12.7
+PT000079,61,M,Urgent,DIGE,0,1,Emergency Medicine,4.7
+PT000080,0,M,Newborn,ONCO,0,1,Oncology,7.9
+PT000081,64,F,Emergency,NEUR,5,0,Neurology,30.2
+PT000082,89,M,Elective,INFX,1,3,General Medicine,11.5
+PT000083,81,M,Elective,TRMA,1,1,Orthopedics,8.3
+PT000084,65,F,Urgent,CIRC,3,0,Cardiology,14.5
+PT000085,39,M,Emergency,CIRC,2,1,Cardiology,13.8
+PT000086,78,M,Urgent,CIRC,1,1,Cardiology,11.4
+PT000087,30,M,Emergency,NEUR,0,0,Emergency Medicine,10.3
+PT000088,88,F,Emergency,MUSC,1,1,Orthopedics,7.7
+PT000089,62,F,Elective,CIRC,2,0,Cardiology,8.4
+PT000090,8,M,Emergency,MUSC,0,0,Orthopedics,4.3
+PT000091,1,M,Newborn,CIRC,0,1,Cardiology,4.1
+PT000092,70,F,Urgent,NEUR,2,2,General Medicine,17.5
+PT000093,53,M,Elective,MUSC,3,3,Orthopedics,4.6
+PT000094,72,F,Trauma,INFX,2,2,General Medicine,21.4
+PT000095,42,F,Trauma,RESP,1,0,Pulmonology,10.8
+PT000096,33,M,Emergency,DIGE,1,0,Surgery,6.4
+PT000097,57,M,Emergency,INFX,0,0,Pulmonology,11.7
+PT000098,59,M,Elective,CIRC,0,2,Cardiology,7.6
+PT000099,51,M,Emergency,CIRC,2,3,General Medicine,13.4
+PT000100,81,M,Emergency,OBST,3,1,Surgery,7.6
+PT000101,42,F,Elective,PSYC,2,1,Neurology,16.2
+PT000102,64,M,Emergency,NEUR,1,0,Neurology,19.7
+PT000103,0,F,Newborn,RESP,0,0,Pulmonology,2.7
+PT000104,28,F,Emergency,OBST,0,0,General Medicine,3.2
+PT000105,33,M,Urgent,ONCO,0,0,Oncology,16.2
+PT000106,58,M,Elective,NEUR,1,0,Neurology,12.0
+PT000107,0,M,Newborn,MUSC,0,0,Orthopedics,1.6
+PT000108,69,F,Trauma,RESP,3,3,Emergency Medicine,13.5
+PT000109,25,M,Emergency,CIRC,0,0,Cardiology,10.1
+PT000110,0,F,Emergency,PSYC,0,0,Neurology,16.1
+PT000111,72,F,Emergency,MUSC,5,1,General Medicine,13.6
+PT000112,56,F,Urgent,RESP,5,2,Pulmonology,14.4
+PT000113,80,U,Elective,RESP,2,2,Pulmonology,8.2
+PT000114,41,F,Elective,DIGE,2,0,Surgery,4.9
+PT000115,65,F,Elective,RESP,2,1,Emergency Medicine,5.6
+PT000116,74,F,Emergency,TRMA,2,2,Surgery,20.7
+PT000117,49,F,Elective,ONCO,2,1,General Medicine,13.3
+PT000118,50,F,Elective,NEUR,3,1,Neurology,15.8
+PT000119,58,F,Emergency,MUSC,2,1,Orthopedics,6.7
+PT000120,68,M,Elective,DIGE,2,0,Surgery,4.5
+PT000121,58,F,Elective,DIGE,2,1,Surgery,5.6
+PT000122,77,F,Emergency,NEUR,7,5,Neurology,53.6
+PT000123,49,F,Urgent,CIRC,2,5,Cardiology,15.5
+PT000124,33,M,Emergency,INFX,0,0,Emergency Medicine,9.1
+PT000125,96,F,Trauma,CIRC,3,3,Cardiology,26.5
+PT000126,47,F,Elective,MUSC,0,0,Orthopedics,2.7
+PT000127,47,F,Trauma,INFX,1,1,General Medicine,15.7
+PT000128,57,M,Trauma,CIRC,0,2,Emergency Medicine,9.1
+PT000129,59,F,Emergency,CIRC,2,0,General Medicine,13.3
+PT000130,51,F,Emergency,DIGE,3,3,Surgery,10.6
+PT000131,58,F,Emergency,RESP,2,0,Emergency Medicine,8.6
+PT000132,57,F,Emergency,PSYC,0,0,Neurology,21.2
+PT000133,61,F,Emergency,DIGE,1,3,Emergency Medicine,7.5
+PT000134,13,F,Elective,INFX,4,1,General Medicine,10.2
+PT000135,0,M,Newborn,DIGE,1,2,Emergency Medicine,2.5
+PT000136,55,F,Emergency,CIRC,2,1,Cardiology,14.4
+PT000137,69,M,Emergency,OBST,0,0,Surgery,4.4
+PT000138,32,F,Urgent,MUSC,0,0,General Medicine,4.3
+PT000139,49,F,Elective,ONCO,0,1,Oncology,12.5
+PT000140,45,M,Emergency,CIRC,1,1,Emergency Medicine,9.2
+PT000141,86,M,Emergency,MUSC,4,2,Orthopedics,13.0
+PT000142,47,M,Urgent,MUSC,5,3,Surgery,10.7
+PT000143,72,F,Urgent,PSYC,3,0,Neurology,29.4
+PT000144,46,F,Urgent,DIGE,0,2,Surgery,6.4
+PT000145,49,M,Emergency,MUSC,1,2,Orthopedics,6.7
+PT000146,53,F,Urgent,RESP,1,1,Pulmonology,9.1
+PT000147,1,M,Newborn,INFX,1,0,General Medicine,4.6
+PT000148,22,F,Elective,MUSC,1,0,General Medicine,3.4
+PT000149,33,M,Urgent,MUSC,0,2,Surgery,5.1
+PT000150,21,M,Urgent,CIRC,0,0,Cardiology,7.9
+PT000151,37,M,Emergency,TRMA,3,1,Orthopedics,15.2
+PT000152,43,F,Emergency,PSYC,1,0,Emergency Medicine,15.2
+PT000153,27,M,Emergency,CIRC,1,4,Cardiology,12.9
+PT000154,1,F,Newborn,DIGE,0,0,General Medicine,1.9
+PT000155,20,M,Urgent,CIRC,2,2,Emergency Medicine,8.4
+PT000156,39,M,Emergency,NEUR,0,0,Emergency Medicine,10.5
+PT000157,81,M,Elective,RESP,1,0,Pulmonology,6.7
+PT000158,66,M,Urgent,NEUR,1,0,General Medicine,13.6
+PT000159,62,F,Emergency,NEUR,0,0,Neurology,17.2
+PT000160,39,M,Elective,ONCO,4,1,Oncology,20.2
+PT000161,29,U,Emergency,CIRC,0,0,Cardiology,9.8
+PT000162,36,M,Emergency,PSYC,0,1,General Medicine,16.1
+PT000163,57,M,Emergency,RESP,3,1,Pulmonology,13.5
+PT000164,74,M,Emergency,CIRC,3,0,Cardiology,16.7
+PT000165,75,M,Emergency,DIGE,2,0,Emergency Medicine,6.9
+PT000166,70,F,Urgent,INFX,2,0,General Medicine,13.7
+PT000167,44,F,Elective,TRMA,1,0,Surgery,8.5
+PT000168,58,M,Elective,ONCO,0,0,General Medicine,9.1
+PT000169,52,F,Emergency,INFX,0,0,General Medicine,11.3
+PT000170,1,F,Newborn,OBST,0,0,General Medicine,1.9
+PT000171,97,F,Elective,RESP,0,1,Pulmonology,7.4
+PT000172,25,F,Emergency,MUSC,0,0,General Medicine,5.2
+PT000173,54,F,Emergency,RESP,4,1,Pulmonology,14.6
+PT000174,81,F,Emergency,PSYC,2,2,General Medicine,27.4
+PT000175,30,F,Emergency,CIRC,2,0,Cardiology,13.2
+PT000176,46,F,Emergency,CIRC,0,1,Cardiology,10.9
+PT000177,48,F,Emergency,MUSC,1,0,Orthopedics,6.3
+PT000178,54,M,Trauma,OBST,4,0,Surgery,7.9
+PT000179,28,F,Elective,PSYC,2,0,General Medicine,11.8
+PT000180,69,F,Trauma,ONCO,1,1,Oncology,29.5
+PT000181,71,M,Elective,PSYC,2,0,Emergency Medicine,11.9
+PT000182,68,F,Emergency,PSYC,3,2,Neurology,34.2
+PT000183,41,F,Elective,MUSC,1,0,Orthopedics,3.6
+PT000184,60,M,Elective,INFX,1,1,General Medicine,9.3
+PT000185,41,F,Elective,ONCO,1,2,Oncology,14.5
+PT000186,52,F,Urgent,NEUR,1,0,Emergency Medicine,11.5
+PT000187,99,F,Urgent,INFX,1,0,Emergency Medicine,11.9
+PT000188,60,M,Elective,CIRC,2,1,General Medicine,7.7
+PT000189,35,M,Urgent,ONCO,0,1,Oncology,17.5
+PT000190,61,F,Urgent,RESP,4,1,Pulmonology,12.7
+PT000191,32,M,Emergency,PSYC,2,1,General Medicine,21.6
+PT000192,35,M,Trauma,RESP,0,0,Emergency Medicine,7.4
+PT000193,38,M,Emergency,CIRC,1,0,Cardiology,11.2
+PT000194,50,M,Elective,TRMA,0,4,Emergency Medicine,7.2
+PT000195,76,F,Urgent,CIRC,4,3,Cardiology,19.8
+PT000196,69,F,Trauma,RESP,2,0,Pulmonology,13.8
+PT000197,68,F,Elective,DIGE,2,1,Emergency Medicine,5.1
+PT000198,37,F,Urgent,TRMA,1,1,Emergency Medicine,9.8
+PT000199,1,M,Newborn,RESP,1,2,General Medicine,4.2
+PT000200,0,M,Newborn,INFX,0,0,General Medicine,4.3
+PT000201,46,M,Urgent,ONCO,1,0,Oncology,19.6
+PT000202,53,M,Emergency,OBST,3,0,Emergency Medicine,4.5
+PT000203,66,M,Urgent,MUSC,4,0,Surgery,9.4
+PT000204,51,M,Emergency,CIRC,4,2,Cardiology,18.9
+PT000205,62,M,Elective,CIRC,4,2,Cardiology,11.6
+PT000206,88,M,Elective,RESP,2,1,Pulmonology,8.3
+PT000207,55,F,Emergency,CIRC,3,0,Cardiology,16.1
+PT000208,80,F,Elective,NEUR,2,1,Neurology,16.1
+PT000209,69,F,Emergency,CIRC,0,1,Cardiology,11.6
+PT000210,30,F,Urgent,MUSC,1,3,Orthopedics,6.5
+PT000211,37,F,Trauma,NEUR,2,2,Emergency Medicine,16.1
+PT000212,42,M,Emergency,DIGE,0,0,Surgery,6.6
+PT000213,42,F,Emergency,RESP,0,0,General Medicine,7.5
+PT000214,56,M,Emergency,ONCO,3,1,Oncology,31.1
+PT000215,70,M,Urgent,NEUR,2,0,Neurology,19.8
+PT000216,82,M,Emergency,ONCO,0,0,Surgery,18.2
+PT000217,64,M,Elective,CIRC,1,0,Emergency Medicine,6.3
+PT000218,50,M,Trauma,CIRC,1,2,Cardiology,16.0
+PT000219,18,F,Emergency,PSYC,1,1,General Medicine,17.6
+PT000220,59,F,Trauma,INFX,1,0,Pulmonology,16.3
+PT000221,58,F,Trauma,RESP,3,4,General Medicine,16.7
+PT000222,1,F,Newborn,MUSC,1,3,Orthopedics,3.6
+PT000223,98,F,Elective,NEUR,3,0,General Medicine,14.9
+PT000224,82,M,Trauma,OBST,4,3,General Medicine,10.0
+PT000225,73,F,Emergency,RESP,1,0,Emergency Medicine,8.2
+PT000226,40,F,Urgent,PSYC,2,1,General Medicine,17.7
+PT000227,48,M,Emergency,CIRC,2,1,Cardiology,14.1
+PT000228,56,M,Urgent,DIGE,2,1,Surgery,8.4
+PT000229,43,F,Urgent,DIGE,0,0,General Medicine,4.5
+PT000230,68,F,Urgent,CIRC,1,0,Cardiology,11.6
+PT000231,65,M,Elective,CIRC,1,0,Cardiology,8.3
+PT000232,37,F,Emergency,INFX,1,0,Pulmonology,13.2
+PT000233,81,M,Trauma,OBST,0,0,Surgery,5.3
+PT000234,60,M,Emergency,DIGE,1,1,Surgery,6.9
+PT000235,25,M,Emergency,PSYC,1,1,Neurology,22.2
+PT000236,57,M,Urgent,ONCO,1,4,Oncology,24.7
+PT000237,63,F,Emergency,MUSC,3,2,Orthopedics,9.1
+PT000238,76,M,Elective,ONCO,4,3,Surgery,22.1
+PT000239,52,F,Emergency,CIRC,5,1,Cardiology,19.7
+PT000240,74,M,Elective,CIRC,3,1,General Medicine,11.2
+PT000241,62,F,Emergency,TRMA,3,2,Emergency Medicine,16.4
+PT000242,33,F,Emergency,ONCO,2,1,Oncology,26.4
+PT000243,31,F,Emergency,RESP,0,2,Emergency Medicine,7.0
+PT000244,79,F,Trauma,MUSC,3,1,General Medicine,13.5
+PT000245,81,F,Urgent,DIGE,1,0,Surgery,6.5
+PT000246,64,F,Trauma,TRMA,3,2,Surgery,25.0
+PT000247,86,F,Emergency,DIGE,2,3,Emergency Medicine,8.3
+PT000248,78,F,Emergency,INFX,3,1,General Medicine,20.7
+PT000249,71,M,Emergency,INFX,4,3,General Medicine,25.1
+PT000250,41,M,Trauma,INFX,0,0,Pulmonology,13.3
+PT000251,1,M,Newborn,NEUR,0,0,Emergency Medicine,4.7
+PT000252,68,M,Urgent,TRMA,3,3,Emergency Medicine,15.1
+PT000253,51,M,Emergency,MUSC,1,2,Surgery,8.0
+PT000254,45,M,Emergency,RESP,1,2,Pulmonology,10.7
+PT000255,63,F,Urgent,RESP,1,1,Pulmonology,9.4
+PT000256,26,M,Trauma,ONCO,3,3,Oncology,34.4
+PT000257,71,F,Urgent,TRMA,5,1,Emergency Medicine,18.5
+PT000258,40,M,Emergency,CIRC,1,0,Cardiology,12.3
+PT000259,65,F,Elective,CIRC,0,0,Emergency Medicine,4.7
+PT000260,48,M,Elective,DIGE,1,1,Emergency Medicine,4.1
+PT000261,53,M,Trauma,CIRC,1,3,Emergency Medicine,11.6
+PT000262,44,M,Urgent,TRMA,1,2,Orthopedics,11.8
+PT000263,55,F,Urgent,INFX,1,2,General Medicine,13.0
+PT000264,94,M,Urgent,CIRC,3,1,Cardiology,17.9
+PT000265,84,F,Emergency,PSYC,1,0,General Medicine,22.4
+PT000266,65,M,Emergency,CIRC,0,0,Cardiology,12.0
+PT000267,58,F,Trauma,RESP,3,1,Pulmonology,15.5
+PT000268,74,M,Elective,CIRC,2,3,Cardiology,11.2
+PT000269,79,F,Emergency,CIRC,1,0,General Medicine,12.7
+PT000270,42,M,Emergency,CIRC,2,0,Cardiology,13.5
+PT000271,57,M,Emergency,CIRC,3,3,Emergency Medicine,13.3
+PT000272,23,M,Urgent,RESP,0,2,Pulmonology,7.7
+PT000273,79,M,Urgent,CIRC,4,0,General Medicine,16.3
+PT000274,97,M,Emergency,DIGE,2,3,Emergency Medicine,8.5
+PT000275,60,U,Emergency,NEUR,1,1,Neurology,20.8
+PT000276,18,M,Emergency,INFX,0,1,Emergency Medicine,8.7
+PT000277,70,M,Emergency,INFX,0,0,General Medicine,12.0
+PT000278,41,F,Emergency,MUSC,0,1,Surgery,7.4
+PT000279,45,M,Emergency,TRMA,3,2,Emergency Medicine,15.4
+PT000280,70,M,Urgent,TRMA,1,2,Emergency Medicine,11.0
+PT000281,63,F,Emergency,CIRC,2,2,General Medicine,14.4
+PT000282,49,F,Trauma,RESP,3,1,Emergency Medicine,10.9
+PT000283,46,F,Elective,RESP,0,0,Pulmonology,4.2
+PT000284,60,M,Emergency,RESP,0,1,General Medicine,9.3
+PT000285,50,F,Urgent,DIGE,3,2,General Medicine,8.0
+PT000286,37,M,Emergency,INFX,3,0,Pulmonology,17.0
+PT000287,52,U,Elective,CIRC,0,0,Cardiology,6.2
+PT000288,64,F,Emergency,INFX,0,0,Pulmonology,11.9
+PT000289,55,F,Urgent,MUSC,2,3,Surgery,8.2
+PT000290,31,M,Emergency,CIRC,1,1,Emergency Medicine,8.6
+PT000291,1,M,Newborn,TRMA,1,2,Surgery,5.6
+PT000292,6,F,Urgent,CIRC,0,2,Cardiology,8.7
+PT000293,50,F,Trauma,PSYC,2,2,General Medicine,26.4
+PT000294,0,F,Newborn,CIRC,0,0,Cardiology,4.0
+PT000295,61,F,Trauma,TRMA,1,2,Emergency Medicine,14.9
+PT000296,69,F,Elective,PSYC,0,1,Emergency Medicine,9.3
+PT000297,79,M,Emergency,OBST,4,1,Surgery,8.7
+PT000298,44,M,Elective,ONCO,2,3,Oncology,17.5
+PT000299,69,M,Urgent,ONCO,1,0,Surgery,17.7
+PT000300,62,M,Trauma,NEUR,1,1,General Medicine,19.1
+PT000301,25,M,Emergency,ONCO,1,0,Oncology,19.7
+PT000302,94,F,Emergency,CIRC,3,1,Cardiology,21.3
+PT000303,31,F,Urgent,MUSC,2,2,Orthopedics,6.4
+PT000304,66,F,Emergency,MUSC,3,1,Orthopedics,9.0
+PT000305,65,M,Emergency,TRMA,2,0,Emergency Medicine,13.1
+PT000306,63,F,Emergency,MUSC,0,0,Orthopedics,5.5
+PT000307,49,F,Trauma,INFX,0,0,General Medicine,12.3
+PT000308,74,F,Elective,DIGE,2,2,Surgery,6.4
+PT000309,28,F,Elective,RESP,0,0,Pulmonology,4.1
+PT000310,57,F,Emergency,CIRC,1,1,Emergency Medicine,9.1
+PT000311,1,F,Newborn,MUSC,0,0,Surgery,2.8
+PT000312,45,M,Urgent,INFX,4,1,General Medicine,16.2
+PT000313,66,F,Urgent,RESP,0,1,Pulmonology,7.8
+PT000314,78,M,Elective,INFX,1,0,Emergency Medicine,7.9
+PT000315,51,M,Trauma,INFX,1,1,General Medicine,16.2
+PT000316,73,M,Elective,INFX,4,1,General Medicine,14.1
+PT000317,59,F,Emergency,INFX,0,1,General Medicine,12.8
+PT000318,0,F,Newborn,NEUR,0,0,Emergency Medicine,4.0
+PT000319,53,F,Elective,RESP,2,2,Pulmonology,7.5
+PT000320,52,M,Emergency,PSYC,1,2,Neurology,25.6
+PT000321,45,M,Emergency,PSYC,1,0,General Medicine,18.7
+PT000322,66,F,Emergency,MUSC,5,4,Orthopedics,11.8
+PT000323,62,M,Urgent,INFX,3,1,General Medicine,15.6
+PT000324,28,F,Urgent,MUSC,2,0,General Medicine,6.8
+PT000325,27,M,Elective,TRMA,0,0,Surgery,7.9
+PT000326,66,F,Emergency,NEUR,1,2,Neurology,22.2
+PT000327,43,F,Emergency,ONCO,1,0,Oncology,23.2
+PT000328,64,F,Elective,MUSC,2,2,Surgery,5.7
+PT000329,73,M,Urgent,DIGE,2,0,Surgery,7.0
+PT000330,34,F,Trauma,RESP,0,0,General Medicine,9.1
+PT000331,31,F,Elective,ONCO,2,3,General Medicine,12.6
+PT000332,90,F,Urgent,RESP,4,3,General Medicine,16.9
+PT000333,65,F,Emergency,NEUR,1,0,Neurology,19.1
+PT000334,50,M,Urgent,TRMA,0,0,Emergency Medicine,8.2
+PT000335,40,F,Urgent,CIRC,0,0,Cardiology,8.1
+PT000336,48,M,Emergency,DIGE,3,1,Surgery,9.2
+PT000337,35,M,Elective,CIRC,2,2,General Medicine,7.6
+PT000338,75,F,Emergency,NEUR,2,0,General Medicine,19.9
+PT000339,43,F,Emergency,CIRC,2,1,Cardiology,14.7
+PT000340,79,M,Emergency,PSYC,5,3,General Medicine,41.2
+PT000341,50,M,Elective,CIRC,2,2,Emergency Medicine,5.9
+PT000342,38,M,Trauma,OBST,0,1,Surgery,5.0
+PT000343,50,M,Elective,ONCO,3,0,Oncology,17.6
+PT000344,8,F,Emergency,DIGE,1,2,Surgery,6.7
+PT000345,56,M,Urgent,ONCO,0,0,Oncology,17.5
+PT000346,55,F,Emergency,ONCO,0,1,General Medicine,16.3
+PT000347,74,M,Elective,PSYC,2,2,Emergency Medicine,12.9
+PT000348,22,M,Elective,RESP,0,1,Pulmonology,4.9
+PT000349,80,F,Emergency,DIGE,3,2,Surgery,12.4
+PT000350,74,M,Elective,CIRC,1,0,Cardiology,7.8
+PT000351,82,M,Elective,DIGE,0,1,General Medicine,3.6
+PT000352,57,F,Emergency,RESP,1,2,Pulmonology,11.1
+PT000353,77,F,Emergency,DIGE,4,0,Surgery,11.3
+PT000354,30,F,Elective,DIGE,0,1,General Medicine,2.5
+PT000355,72,M,Trauma,MUSC,4,1,Orthopedics,11.9
+PT000356,43,F,Emergency,MUSC,1,1,Orthopedics,7.1
+PT000357,27,U,Trauma,ONCO,0,0,Oncology,20.7
+PT000358,37,F,Emergency,ONCO,0,0,Oncology,19.0
+PT000359,58,M,Emergency,MUSC,0,1,Orthopedics,4.8
+PT000360,42,M,Emergency,DIGE,2,3,Surgery,9.2
+PT000361,65,M,Emergency,PSYC,1,2,Neurology,27.1
+PT000362,24,M,Trauma,CIRC,1,2,Cardiology,13.4
+PT000363,18,F,Elective,CIRC,0,0,Emergency Medicine,4.3
+PT000364,84,M,Urgent,CIRC,4,1,Cardiology,19.3
+PT000365,75,M,Elective,NEUR,2,1,Neurology,15.1
+PT000366,0,M,Newborn,INFX,0,0,Pulmonology,4.7
+PT000367,58,F,Urgent,ONCO,5,4,Oncology,38.0
+PT000368,77,M,Emergency,NEUR,1,2,Neurology,23.4
+PT000369,66,M,Trauma,INFX,2,1,Pulmonology,19.2
+PT000370,0,M,Newborn,PSYC,0,1,Neurology,7.9
+PT000371,79,F,Elective,ONCO,1,1,Oncology,17.0
+PT000372,44,M,Emergency,RESP,1,2,General Medicine,9.6
+PT000373,59,F,Trauma,INFX,2,1,General Medicine,18.6
+PT000374,58,M,Elective,INFX,0,2,Pulmonology,7.8
+PT000375,53,M,Emergency,CIRC,3,0,Cardiology,15.6
+PT000376,51,M,Urgent,CIRC,5,5,Cardiology,19.9
+PT000377,59,M,Emergency,PSYC,2,1,General Medicine,22.9
+PT000378,59,M,Emergency,MUSC,7,2,General Medicine,15.2
+PT000379,38,F,Urgent,INFX,1,2,General Medicine,11.4
+PT000380,73,F,Elective,NEUR,4,3,Neurology,22.0
+PT000381,39,M,Elective,DIGE,1,1,Surgery,5.2
+PT000382,54,M,Elective,PSYC,3,1,General Medicine,15.8
+PT000383,52,F,Emergency,ONCO,1,1,Oncology,23.5
+PT000384,65,M,Urgent,MUSC,0,0,General Medicine,5.0
+PT000385,18,M,Elective,INFX,0,0,General Medicine,5.8
+PT000386,75,M,Emergency,OBST,0,0,Emergency Medicine,3.5
+PT000387,45,M,Emergency,NEUR,2,3,General Medicine,19.7
+PT000388,81,M,Emergency,OBST,5,1,Surgery,8.9
+PT000389,49,U,Trauma,CIRC,0,1,Cardiology,12.0
+PT000390,57,U,Urgent,TRMA,3,2,Emergency Medicine,13.8
+PT000391,94,F,Emergency,DIGE,0,0,Surgery,7.5
+PT000392,53,M,Elective,CIRC,3,1,Cardiology,10.9
+PT000393,82,M,Emergency,DIGE,1,4,Surgery,9.4
+PT000394,0,M,Newborn,NEUR,0,0,Neurology,5.7
+PT000395,66,M,Trauma,CIRC,3,0,Cardiology,17.8
+PT000396,59,M,Emergency,MUSC,1,0,General Medicine,7.6
+PT000397,74,M,Emergency,TRMA,2,3,Emergency Medicine,16.9
+PT000398,45,M,Urgent,RESP,1,0,Pulmonology,8.0
+PT000399,39,M,Emergency,MUSC,1,1,Orthopedics,6.1
+PT000400,46,M,Emergency,MUSC,3,2,Orthopedics,8.2
+PT000401,0,F,Newborn,RESP,0,2,Emergency Medicine,2.9
+PT000402,54,M,Emergency,PSYC,2,1,General Medicine,24.2
+PT000403,71,F,Elective,ONCO,2,2,Surgery,16.3
+PT000404,83,M,Emergency,CIRC,3,1,Cardiology,19.5
+PT000405,39,F,Elective,OBST,0,0,Surgery,2.1
+PT000406,44,M,Urgent,TRMA,6,3,Surgery,24.0
+PT000407,31,F,Urgent,RESP,0,2,Pulmonology,8.0
+PT000408,97,M,Emergency,TRMA,4,0,Emergency Medicine,22.3
+PT000409,64,M,Elective,CIRC,0,2,Emergency Medicine,5.1
+PT000410,67,F,Elective,OBST,2,1,Surgery,4.2
+PT000411,33,M,Elective,NEUR,0,3,Neurology,10.8
+PT000412,58,M,Trauma,NEUR,1,0,General Medicine,18.3
+PT000413,68,F,Emergency,CIRC,1,2,Cardiology,14.2
+PT000414,53,M,Elective,PSYC,1,0,Neurology,14.3
+PT000415,78,F,Elective,CIRC,3,3,Cardiology,12.1
+PT000416,100,F,Emergency,RESP,2,1,Pulmonology,15.8
+PT000417,40,M,Urgent,CIRC,1,2,Cardiology,11.6
+PT000418,39,M,Emergency,ONCO,2,1,Oncology,25.9
+PT000419,41,M,Urgent,RESP,0,2,Pulmonology,8.2
+PT000420,89,F,Trauma,PSYC,1,0,General Medicine,25.4
+PT000421,78,M,Urgent,NEUR,4,2,Neurology,30.9
+PT000422,55,M,Emergency,CIRC,1,0,Cardiology,12.5
+PT000423,59,M,Elective,CIRC,2,0,General Medicine,7.1
+PT000424,0,F,Newborn,CIRC,0,0,Emergency Medicine,2.8
+PT000425,0,F,Newborn,DIGE,0,1,Emergency Medicine,2.3
+PT000426,51,F,Emergency,ONCO,1,3,Surgery,21.2
+PT000427,53,F,Emergency,RESP,2,1,Pulmonology,11.4
+PT000428,70,F,Elective,TRMA,2,1,Orthopedics,9.5
+PT000429,54,F,Emergency,CIRC,2,4,Emergency Medicine,13.2
+PT000430,54,F,Emergency,ONCO,2,5,General Medicine,24.7
+PT000431,58,F,Elective,PSYC,4,0,General Medicine,16.8
+PT000432,73,M,Urgent,ONCO,3,1,Surgery,25.3
+PT000433,89,F,Emergency,NEUR,3,0,General Medicine,24.3
+PT000434,69,F,Emergency,TRMA,1,1,Orthopedics,13.9
+PT000435,73,M,Emergency,CIRC,0,3,Cardiology,12.8
+PT000436,54,M,Emergency,RESP,1,0,Pulmonology,9.9
+PT000437,45,M,Emergency,CIRC,2,1,Cardiology,13.3
+PT000438,70,F,Urgent,MUSC,2,3,Orthopedics,7.5
+PT000439,61,M,Urgent,ONCO,4,3,Surgery,27.9
+PT000440,31,F,Elective,DIGE,0,0,Surgery,3.5
+PT000441,52,M,Emergency,TRMA,0,1,Emergency Medicine,11.1
+PT000442,56,F,Urgent,CIRC,3,2,Cardiology,15.2
+PT000443,48,M,Urgent,ONCO,1,1,Surgery,17.1
+PT000444,86,F,Urgent,RESP,3,1,Pulmonology,13.9
+PT000445,67,F,Elective,RESP,1,0,Emergency Medicine,4.7
+PT000446,84,M,Emergency,NEUR,4,7,Neurology,43.6
+PT000447,63,M,Elective,OBST,2,2,General Medicine,3.3
+PT000448,60,M,Elective,DIGE,3,1,Surgery,6.0
+PT000449,40,M,Emergency,CIRC,2,2,Cardiology,15.4
+PT000450,58,F,Urgent,DIGE,1,2,General Medicine,6.7
+PT000451,58,F,Urgent,CIRC,1,2,Cardiology,11.4
+PT000452,32,F,Urgent,TRMA,0,0,Emergency Medicine,7.4
+PT000453,48,F,Emergency,NEUR,2,2,Emergency Medicine,15.5
+PT000454,52,M,Urgent,RESP,1,0,Pulmonology,9.1
+PT000455,66,F,Emergency,CIRC,0,0,General Medicine,9.8
+PT000456,67,F,Trauma,RESP,2,1,Pulmonology,14.4
+PT000457,47,M,Emergency,OBST,1,1,Surgery,4.8
+PT000458,67,F,Urgent,MUSC,4,4,Orthopedics,10.0
+PT000459,55,M,Emergency,ONCO,1,1,General Medicine,17.9
+PT000460,3,F,Urgent,DIGE,0,1,Surgery,5.5
+PT000461,49,F,Urgent,DIGE,1,0,Surgery,5.6
+PT000462,79,F,Emergency,CIRC,1,0,Cardiology,14.2
+PT000463,26,M,Urgent,PSYC,1,1,Neurology,19.5
+PT000464,60,F,Elective,RESP,2,1,Pulmonology,7.3
+PT000465,88,M,Urgent,DIGE,3,1,Surgery,10.2
+PT000466,44,F,Elective,NEUR,2,1,General Medicine,11.0
+PT000467,58,M,Urgent,NEUR,2,2,Neurology,21.4
+PT000468,33,F,Emergency,PSYC,1,1,Emergency Medicine,15.9
+PT000469,89,F,Trauma,CIRC,2,2,Cardiology,21.8
+PT000470,56,M,Elective,MUSC,1,0,Orthopedics,4.0
+PT000471,59,M,Emergency,INFX,3,3,General Medicine,20.6
+PT000472,84,F,Urgent,MUSC,2,0,Orthopedics,7.4
+PT000473,71,M,Elective,CIRC,3,0,Cardiology,11.2
+PT000474,41,M,Urgent,CIRC,0,2,Cardiology,9.9
+PT000475,46,M,Elective,RESP,0,1,Pulmonology,5.1
+PT000476,67,M,Elective,RESP,3,1,Pulmonology,8.6
+PT000477,46,F,Urgent,INFX,0,0,Emergency Medicine,8.3
+PT000478,18,F,Urgent,DIGE,1,2,Surgery,6.0
+PT000479,57,M,Emergency,DIGE,0,0,General Medicine,6.0
+PT000480,30,M,Elective,INFX,0,1,General Medicine,7.2
+PT000481,89,M,Elective,INFX,1,1,General Medicine,10.1
+PT000482,61,M,Elective,RESP,1,0,Pulmonology,4.8
+PT000483,41,F,Emergency,DIGE,4,1,Surgery,11.0
+PT000484,45,M,Urgent,INFX,0,1,General Medicine,10.1
+PT000485,22,F,Emergency,CIRC,0,1,Cardiology,9.6
+PT000486,37,F,Elective,INFX,1,1,Pulmonology,7.9
+PT000487,77,F,Elective,MUSC,1,0,General Medicine,4.7
+PT000488,1,F,Newborn,RESP,0,1,General Medicine,3.0
+PT000489,72,M,Elective,DIGE,4,1,Surgery,7.0
+PT000490,56,M,Elective,DIGE,0,1,Surgery,3.7
+PT000491,50,M,Elective,NEUR,2,0,Emergency Medicine,8.9
+PT000492,1,F,Newborn,NEUR,0,0,Neurology,7.2
+PT000493,97,F,Emergency,NEUR,3,1,Neurology,34.3
+PT000494,54,M,Emergency,INFX,3,3,General Medicine,20.0
+PT000495,0,M,Newborn,ONCO,0,1,Oncology,7.6
+PT000496,84,M,Elective,DIGE,4,2,Surgery,8.3
+PT000497,1,F,Newborn,MUSC,0,0,Orthopedics,2.3
+PT000498,45,F,Elective,DIGE,4,2,Surgery,6.2
+PT000499,45,F,Emergency,INFX,3,3,General Medicine,18.6
+PT000500,56,F,Urgent,MUSC,3,1,Orthopedics,7.8
+PT000501,57,M,Urgent,ONCO,0,2,Oncology,19.8
+PT000502,100,F,Trauma,TRMA,1,2,Emergency Medicine,18.8
+PT000503,38,F,Elective,PSYC,1,1,Neurology,13.7
+PT000504,0,M,Newborn,MUSC,0,2,Surgery,2.6
+PT000505,70,F,Urgent,MUSC,0,1,Orthopedics,4.5
+PT000506,58,M,Emergency,ONCO,0,1,Oncology,21.3
+PT000507,0,F,Newborn,INFX,0,0,Pulmonology,4.6
+PT000508,38,F,Elective,TRMA,1,1,Surgery,9.1
+PT000509,60,F,Trauma,MUSC,1,0,Surgery,9.1
+PT000510,68,F,Emergency,CIRC,1,1,Cardiology,13.7
+PT000511,64,M,Emergency,CIRC,2,0,General Medicine,13.0
+PT000512,69,F,Elective,TRMA,2,0,Emergency Medicine,7.8
+PT000513,85,F,Emergency,CIRC,3,3,Cardiology,21.4
+PT000514,76,F,Emergency,RESP,2,1,Pulmonology,13.7
+PT000515,59,F,Urgent,INFX,3,2,General Medicine,17.2
+PT000516,36,M,Elective,RESP,0,0,Emergency Medicine,3.8
+PT000517,47,F,Urgent,INFX,1,0,General Medicine,11.6
+PT000518,54,F,Trauma,ONCO,1,1,Oncology,27.9
+PT000519,63,M,Elective,CIRC,1,4,Cardiology,9.0
+PT000520,49,F,Emergency,TRMA,3,2,Emergency Medicine,16.5
+PT000521,1,F,Newborn,TRMA,0,0,Emergency Medicine,4.4
+PT000522,35,F,Elective,INFX,1,0,General Medicine,8.3
+PT000523,27,F,Elective,CIRC,1,0,Cardiology,7.0
+PT000524,54,M,Emergency,DIGE,6,5,General Medicine,15.0
+PT000525,30,U,Elective,CIRC,4,0,General Medicine,8.3
+PT000526,39,M,Emergency,INFX,5,1,General Medicine,21.5
+PT000527,51,F,Emergency,OBST,0,0,Surgery,4.5
+PT000528,33,M,Emergency,OBST,1,1,Emergency Medicine,4.2
+PT000529,65,F,Urgent,ONCO,1,0,Oncology,20.7
+PT000530,72,F,Emergency,INFX,1,0,General Medicine,14.9
+PT000531,48,F,Emergency,NEUR,3,1,Neurology,25.9
+PT000532,50,F,Elective,NEUR,0,2,General Medicine,8.3
+PT000533,68,M,Emergency,INFX,5,6,Emergency Medicine,22.6
+PT000534,44,F,Trauma,NEUR,3,1,Neurology,27.0
+PT000535,43,F,Emergency,CIRC,0,0,Cardiology,10.2
+PT000536,81,M,Emergency,RESP,3,2,Pulmonology,16.1
+PT000537,75,F,Urgent,MUSC,1,0,Surgery,7.3
+PT000538,69,F,Elective,CIRC,2,0,General Medicine,9.4
+PT000539,76,F,Urgent,CIRC,1,3,Emergency Medicine,10.7
+PT000540,20,F,Elective,TRMA,0,0,Orthopedics,5.1
+PT000541,1,M,Newborn,OBST,2,3,Surgery,2.6
+PT000542,65,F,Elective,DIGE,2,0,Surgery,5.5
+PT000543,77,M,Emergency,TRMA,1,2,Emergency Medicine,14.0
+PT000544,65,M,Elective,OBST,3,4,General Medicine,4.3
+PT000545,59,M,Urgent,CIRC,1,4,Cardiology,13.1
+PT000546,53,M,Urgent,MUSC,2,0,General Medicine,6.4
+PT000547,65,M,Urgent,INFX,2,2,Pulmonology,15.2
+PT000548,52,F,Emergency,CIRC,3,5,General Medicine,17.2
+PT000549,0,M,Newborn,ONCO,2,1,Surgery,8.5
+PT000550,28,M,Trauma,MUSC,2,0,Surgery,8.8
+PT000551,48,M,Elective,MUSC,1,2,Orthopedics,3.7
+PT000552,97,F,Emergency,CIRC,3,0,Cardiology,20.5
+PT000553,46,M,Elective,RESP,2,3,Emergency Medicine,6.5
+PT000554,53,M,Trauma,PSYC,0,1,General Medicine,19.6
+PT000555,41,F,Emergency,CIRC,1,1,Emergency Medicine,9.8
+PT000556,64,M,Urgent,RESP,3,1,Pulmonology,11.7
+PT000557,44,F,Elective,RESP,2,1,Pulmonology,7.1
+PT000558,54,M,Elective,MUSC,0,0,Surgery,3.9
+PT000559,74,M,Urgent,DIGE,3,2,General Medicine,9.5
+PT000560,45,M,Trauma,MUSC,1,0,Orthopedics,6.6
+PT000561,73,F,Emergency,CIRC,1,0,Cardiology,14.4
+PT000562,1,M,Newborn,RESP,2,1,General Medicine,3.4
+PT000563,78,F,Elective,TRMA,1,0,Orthopedics,9.3
+PT000564,61,M,Emergency,DIGE,1,1,Surgery,7.8
+PT000565,100,F,Urgent,NEUR,2,3,Neurology,29.1
+PT000566,78,M,Emergency,NEUR,1,0,Neurology,22.3
+PT000567,64,M,Urgent,ONCO,3,3,Oncology,30.6
+PT000568,41,M,Urgent,CIRC,0,0,Emergency Medicine,6.1
+PT000569,56,F,Emergency,INFX,3,2,Pulmonology,19.9
+PT000570,85,M,Elective,MUSC,3,3,Orthopedics,7.7
+PT000571,90,F,Emergency,INFX,1,2,Emergency Medicine,14.0
+PT000572,86,F,Emergency,TRMA,2,4,Emergency Medicine,19.9
+PT000573,73,U,Elective,MUSC,3,3,Orthopedics,6.5
+PT000574,34,M,Trauma,ONCO,1,0,General Medicine,18.6
+PT000575,67,F,Emergency,TRMA,2,3,Orthopedics,16.5
+PT000576,34,F,Emergency,MUSC,2,1,Orthopedics,6.9
+PT000577,30,F,Emergency,PSYC,2,1,General Medicine,20.0
+PT000578,63,U,Emergency,DIGE,4,4,Surgery,12.2
+PT000579,68,F,Emergency,TRMA,2,4,Emergency Medicine,16.4
+PT000580,75,F,Trauma,INFX,2,1,General Medicine,19.6
+PT000581,67,F,Emergency,MUSC,1,2,Surgery,9.3
+PT000582,68,M,Urgent,MUSC,2,1,Orthopedics,6.7
+PT000583,39,F,Elective,CIRC,0,1,Cardiology,6.1
+PT000584,56,F,Emergency,INFX,1,2,General Medicine,14.6
+PT000585,29,F,Elective,PSYC,0,0,General Medicine,9.4
+PT000586,20,F,Urgent,DIGE,1,0,Surgery,5.6
+PT000587,72,M,Elective,RESP,5,3,General Medicine,11.6
+PT000588,44,M,Emergency,INFX,0,1,Emergency Medicine,9.7
+PT000589,75,M,Elective,RESP,2,0,General Medicine,7.4
+PT000590,79,F,Emergency,CIRC,1,1,Cardiology,13.9
+PT000591,46,M,Emergency,PSYC,2,1,General Medicine,22.1
+PT000592,69,F,Emergency,MUSC,2,0,Orthopedics,7.8
+PT000593,45,F,Urgent,RESP,3,1,Pulmonology,11.6
+PT000594,23,F,Emergency,DIGE,0,0,General Medicine,5.1
+PT000595,60,M,Emergency,CIRC,3,2,Cardiology,17.7
+PT000596,49,F,Emergency,RESP,1,0,General Medicine,8.9
+PT000597,50,M,Emergency,NEUR,2,1,Neurology,22.2
+PT000598,96,F,Elective,DIGE,3,3,Emergency Medicine,6.2
+PT000599,0,M,Newborn,OBST,0,0,Surgery,2.3
+PT000600,65,M,Elective,DIGE,3,1,Surgery,6.1
+PT000601,39,M,Emergency,MUSC,3,3,Orthopedics,8.6
+PT000602,75,F,Emergency,ONCO,1,1,Oncology,27.5
+PT000603,64,M,Urgent,PSYC,1,3,General Medicine,19.6
+PT000604,65,F,Emergency,NEUR,2,2,Neurology,26.0
+PT000605,40,F,Elective,OBST,1,1,Surgery,2.7
+PT000606,43,F,Emergency,ONCO,1,0,Oncology,21.8
+PT000607,76,M,Emergency,TRMA,5,1,Emergency Medicine,22.3
+PT000608,92,M,Elective,CIRC,1,1,General Medicine,8.4
+PT000609,67,M,Elective,ONCO,4,2,Oncology,22.1
+PT000610,41,M,Emergency,MUSC,1,2,Surgery,9.5
+PT000611,64,F,Urgent,DIGE,2,0,Surgery,7.5
+PT000612,100,M,Trauma,NEUR,3,2,Neurology,41.2
+PT000613,60,M,Emergency,OBST,1,0,Emergency Medicine,3.5
+PT000614,86,M,Emergency,OBST,3,2,General Medicine,7.3
+PT000615,44,F,Urgent,RESP,3,2,Emergency Medicine,9.7
+PT000616,57,M,Emergency,ONCO,0,0,Oncology,19.4
+PT000617,0,F,Newborn,ONCO,2,1,Oncology,9.6
+PT000618,66,M,Elective,INFX,2,3,General Medicine,10.8
+PT000619,43,F,Urgent,CIRC,0,0,Cardiology,9.6
+PT000620,43,F,Elective,CIRC,1,1,Cardiology,7.3
+PT000621,77,M,Urgent,ONCO,1,0,Oncology,22.6
+PT000622,81,M,Emergency,MUSC,3,1,Orthopedics,10.0
+PT000623,87,M,Emergency,OBST,3,1,General Medicine,7.9
+PT000624,92,M,Emergency,MUSC,1,0,Surgery,8.7
+PT000625,61,M,Urgent,OBST,5,6,Surgery,8.8
+PT000626,52,F,Elective,INFX,2,0,Pulmonology,9.5
+PT000627,84,F,Urgent,ONCO,3,1,Oncology,32.6
+PT000628,72,M,Trauma,CIRC,2,1,General Medicine,15.9
+PT000629,39,F,Emergency,DIGE,2,0,Emergency Medicine,5.9
+PT000630,38,M,Urgent,ONCO,1,1,Oncology,19.9
+PT000631,67,F,Emergency,PSYC,1,0,General Medicine,19.5
+PT000632,55,M,Elective,TRMA,0,0,Orthopedics,6.0
+PT000633,57,F,Urgent,CIRC,2,1,Emergency Medicine,9.1
+PT000634,78,F,Elective,INFX,3,0,Pulmonology,12.6
+PT000635,1,M,Newborn,CIRC,0,0,Cardiology,3.6
+PT000636,83,M,Emergency,CIRC,3,1,Cardiology,19.3
+PT000637,21,M,Emergency,NEUR,0,0,Neurology,14.0
+PT000638,63,F,Elective,NEUR,2,2,Neurology,14.8
+PT000639,71,F,Elective,ONCO,1,0,Oncology,15.7
+PT000640,29,F,Emergency,TRMA,1,0,Orthopedics,11.8
+PT000641,46,F,Urgent,ONCO,2,1,Oncology,23.3
+PT000642,42,F,Trauma,ONCO,3,3,Oncology,36.6
+PT000643,58,M,Emergency,CIRC,1,3,Cardiology,13.8
+PT000644,89,F,Urgent,RESP,4,5,General Medicine,19.2
+PT000645,96,F,Emergency,DIGE,0,2,Surgery,9.5
+PT000646,0,M,Newborn,TRMA,0,0,Emergency Medicine,3.8
+PT000647,68,F,Emergency,CIRC,0,0,General Medicine,11.2
+PT000648,69,M,Emergency,MUSC,3,2,General Medicine,10.2
+PT000649,65,M,Trauma,NEUR,3,2,General Medicine,24.8
+PT000650,66,F,Urgent,CIRC,1,0,Cardiology,10.7
+PT000651,64,M,Trauma,INFX,1,0,General Medicine,15.5
+PT000652,90,M,Elective,PSYC,2,1,General Medicine,18.1
+PT000653,79,M,Emergency,NEUR,2,2,Neurology,27.4
+PT000654,38,F,Emergency,RESP,2,1,Pulmonology,10.9
+PT000655,73,F,Emergency,TRMA,3,0,Emergency Medicine,16.3
+PT000656,75,M,Emergency,INFX,0,0,General Medicine,13.1
+PT000657,64,M,Emergency,TRMA,0,0,Emergency Medicine,10.9
+PT000658,79,M,Elective,RESP,4,1,General Medicine,9.9
+PT000659,62,F,Elective,DIGE,2,1,Surgery,4.4
+PT000660,62,M,Urgent,INFX,1,0,General Medicine,11.4
+PT000661,60,F,Emergency,RESP,0,0,General Medicine,9.3
+PT000662,20,F,Urgent,TRMA,2,2,Emergency Medicine,11.5
+PT000663,56,M,Urgent,RESP,2,0,Emergency Medicine,7.8
+PT000664,45,F,Trauma,CIRC,2,2,Emergency Medicine,13.2
+PT000665,35,F,Urgent,INFX,1,0,General Medicine,11.9
+PT000666,85,F,Urgent,NEUR,1,0,General Medicine,15.8
+PT000667,68,M,Urgent,ONCO,4,0,Oncology,29.5
+PT000668,57,F,Elective,OBST,2,2,Surgery,3.4
+PT000669,47,F,Emergency,RESP,0,1,Pulmonology,8.8
+PT000670,64,F,Urgent,INFX,1,1,General Medicine,11.8
+PT000671,77,U,Elective,CIRC,3,1,Cardiology,10.7
+PT000672,1,M,Newborn,DIGE,0,0,Surgery,1.5
+PT000673,58,F,Emergency,OBST,2,1,Surgery,6.3
+PT000674,74,F,Emergency,NEUR,1,2,Neurology,22.4
+PT000675,21,M,Trauma,DIGE,1,1,General Medicine,8.0
+PT000676,57,M,Trauma,INFX,4,4,General Medicine,25.2
+PT000677,50,M,Urgent,PSYC,4,1,Emergency Medicine,20.7
+PT000678,55,F,Emergency,MUSC,4,1,Orthopedics,9.2
+PT000679,48,M,Emergency,CIRC,1,1,Cardiology,11.8
+PT000680,61,F,Urgent,INFX,0,1,Pulmonology,12.0
+PT000681,95,M,Elective,CIRC,4,1,Cardiology,15.2
+PT000682,52,M,Elective,RESP,2,0,Pulmonology,6.4
+PT000683,64,F,Emergency,CIRC,3,2,Cardiology,17.5
+PT000684,96,M,Emergency,MUSC,3,1,Surgery,13.1
+PT000685,48,F,Emergency,DIGE,0,0,General Medicine,5.6
+PT000686,92,M,Urgent,INFX,7,1,Emergency Medicine,24.6
+PT000687,58,F,Elective,INFX,2,1,Pulmonology,10.1
+PT000688,92,M,Urgent,OBST,2,0,Surgery,5.0
+PT000689,72,U,Emergency,ONCO,2,2,Oncology,31.6
+PT000690,64,F,Trauma,DIGE,2,1,Surgery,10.4
+PT000691,57,M,Trauma,RESP,0,0,General Medicine,9.4
+PT000692,46,M,Trauma,PSYC,1,1,Emergency Medicine,18.0
+PT000693,59,M,Trauma,RESP,0,0,Pulmonology,9.6
+PT000694,1,F,Newborn,INFX,2,0,General Medicine,5.3
+PT000695,58,F,Emergency,PSYC,4,1,General Medicine,29.3
+PT000696,52,M,Elective,MUSC,2,1,Orthopedics,4.0
+PT000697,53,M,Elective,ONCO,2,0,Oncology,16.2
+PT000698,77,F,Urgent,DIGE,3,1,Emergency Medicine,7.3
+PT000699,81,F,Urgent,NEUR,1,0,Neurology,19.2
+PT000700,45,F,Elective,RESP,2,1,General Medicine,6.3
+PT000701,0,M,Newborn,RESP,1,0,Pulmonology,3.6
+PT000702,65,F,Elective,INFX,1,1,General Medicine,8.8
+PT000703,0,U,Newborn,CIRC,0,0,General Medicine,3.3
+PT000704,80,M,Emergency,TRMA,3,4,Emergency Medicine,20.9
+PT000705,34,M,Emergency,RESP,2,0,Pulmonology,10.9
+PT000706,53,M,Emergency,DIGE,3,2,Surgery,11.1
+PT000707,40,F,Urgent,ONCO,1,1,Oncology,20.3
+PT000708,53,M,Emergency,ONCO,2,4,Surgery,25.0
+PT000709,88,F,Elective,MUSC,0,0,Orthopedics,4.5
+PT000710,31,F,Trauma,MUSC,1,4,Surgery,9.6
+PT000711,27,F,Urgent,OBST,2,0,Surgery,5.3
+PT000712,42,F,Urgent,NEUR,1,1,Neurology,17.6
+PT000713,63,M,Emergency,TRMA,3,1,Orthopedics,16.9
+PT000714,70,F,Emergency,PSYC,3,2,General Medicine,28.5
+PT000715,66,M,Urgent,ONCO,1,0,General Medicine,15.8
+PT000716,80,F,Emergency,RESP,1,0,General Medicine,10.8
+PT000717,25,F,Elective,DIGE,1,0,Surgery,4.3
+PT000718,81,F,Emergency,CIRC,2,0,Cardiology,16.7
+PT000719,52,F,Urgent,NEUR,4,2,Neurology,26.1
+PT000720,72,M,Urgent,OBST,1,0,Surgery,4.6
+PT000721,33,F,Elective,MUSC,0,0,General Medicine,4.8
+PT000722,58,F,Urgent,MUSC,2,1,Orthopedics,6.4
+PT000723,62,F,Urgent,CIRC,0,0,Cardiology,8.7
+PT000724,80,M,Urgent,OBST,1,1,Surgery,4.2
+PT000725,28,M,Elective,CIRC,0,2,Emergency Medicine,5.5
+PT000726,59,F,Elective,CIRC,0,1,Emergency Medicine,5.0
+PT000727,37,M,Emergency,RESP,0,0,Pulmonology,8.3
+PT000728,68,F,Elective,CIRC,2,0,Emergency Medicine,6.2
+PT000729,73,F,Emergency,MUSC,4,0,Orthopedics,10.0
+PT000730,0,F,Newborn,MUSC,0,0,Orthopedics,1.6
+PT000731,48,M,Urgent,INFX,4,2,General Medicine,17.7
+PT000732,76,F,Trauma,CIRC,4,1,Cardiology,23.9
+PT000733,84,M,Elective,CIRC,2,1,Cardiology,10.7
+PT000734,27,M,Elective,INFX,1,1,General Medicine,7.9
+PT000735,70,F,Emergency,CIRC,4,1,Emergency Medicine,13.7
+PT000736,76,M,Emergency,NEUR,5,2,Neurology,38.1
+PT000737,53,M,Trauma,RESP,1,1,Pulmonology,11.1
+PT000738,35,M,Elective,RESP,0,0,General Medicine,6.2
+PT000739,76,F,Emergency,INFX,2,1,Emergency Medicine,15.4
+PT000740,35,F,Urgent,INFX,0,0,General Medicine,10.1
+PT000741,55,M,Urgent,CIRC,2,1,Cardiology,12.4
+PT000742,57,M,Elective,CIRC,2,0,Cardiology,8.5
+PT000743,0,F,Newborn,TRMA,0,1,Emergency Medicine,3.5
+PT000744,46,M,Elective,CIRC,0,1,General Medicine,5.2
+PT000745,45,F,Emergency,MUSC,2,2,Orthopedics,7.3
+PT000746,60,F,Emergency,MUSC,3,3,Surgery,12.2
+PT000747,77,F,Emergency,INFX,2,1,General Medicine,18.4
+PT000748,100,F,Emergency,MUSC,4,1,Surgery,15.2
+PT000749,29,F,Trauma,ONCO,1,0,General Medicine,18.3
+PT000750,64,F,Elective,TRMA,0,1,Surgery,9.1
+PT000751,37,M,Elective,RESP,0,1,General Medicine,4.7
+PT000752,77,M,Emergency,INFX,2,1,Pulmonology,18.9
+PT000753,40,F,Urgent,RESP,0,0,Emergency Medicine,5.8
+PT000754,45,M,Elective,MUSC,2,1,Surgery,5.6
+PT000755,47,F,Elective,NEUR,0,0,General Medicine,8.1
+PT000756,57,F,Urgent,RESP,3,0,Pulmonology,10.9
+PT000757,64,F,Elective,INFX,2,1,General Medicine,9.7
+PT000758,67,M,Elective,PSYC,2,1,General Medicine,13.9
+PT000759,58,F,Trauma,CIRC,3,2,Cardiology,18.8
+PT000760,33,F,Urgent,MUSC,1,3,Orthopedics,5.8
+PT000761,0,M,Newborn,NEUR,0,0,Neurology,6.6
+PT000762,0,F,Newborn,CIRC,0,2,Cardiology,3.6
+PT000763,80,F,Elective,CIRC,2,0,Emergency Medicine,7.3
+PT000764,45,F,Emergency,CIRC,2,0,General Medicine,12.5
+PT000765,28,F,Emergency,PSYC,0,1,General Medicine,15.0
+PT000766,57,M,Emergency,CIRC,1,1,Cardiology,12.9
+PT000767,83,M,Elective,RESP,2,1,Pulmonology,9.3
+PT000768,61,F,Elective,CIRC,4,1,Cardiology,11.5
+PT000769,54,M,Elective,CIRC,1,3,Cardiology,7.6
+PT000770,41,M,Emergency,DIGE,0,1,Surgery,6.6
+PT000771,0,M,Newborn,RESP,0,3,Emergency Medicine,2.5
+PT000772,38,M,Emergency,DIGE,1,1,Surgery,7.5
+PT000773,44,F,Emergency,DIGE,1,0,Surgery,6.6
+PT000774,1,M,Newborn,TRMA,2,2,Emergency Medicine,5.4
+PT000775,23,F,Emergency,CIRC,1,0,Cardiology,10.8
+PT000776,82,M,Elective,TRMA,3,1,Emergency Medicine,11.2
+PT000777,70,F,Trauma,DIGE,2,0,Surgery,9.5
+PT000778,75,M,Urgent,CIRC,0,2,General Medicine,9.6
+PT000779,69,F,Elective,ONCO,5,2,Oncology,24.3
+PT000780,55,M,Emergency,TRMA,3,3,Surgery,22.6
+PT000781,38,F,Trauma,RESP,0,0,Pulmonology,9.4
+PT000782,55,M,Urgent,PSYC,2,0,General Medicine,18.2
+PT000783,39,M,Emergency,MUSC,2,1,Surgery,9.3
+PT000784,67,M,Elective,DIGE,0,1,Surgery,4.1
+PT000785,73,F,Elective,OBST,0,1,Surgery,2.9
+PT000786,86,F,Elective,INFX,2,3,General Medicine,12.9
+PT000787,65,M,Emergency,TRMA,1,1,Emergency Medicine,12.8
+PT000788,76,M,Trauma,INFX,0,0,General Medicine,14.8
+PT000789,52,F,Elective,ONCO,1,0,Oncology,13.8
+PT000790,49,F,Urgent,DIGE,0,1,General Medicine,5.7
+PT000791,67,M,Elective,RESP,2,1,Pulmonology,7.6
+PT000792,51,F,Elective,INFX,0,1,Pulmonology,7.9
+PT000793,63,F,Emergency,INFX,0,2,Pulmonology,13.9
+PT000794,38,F,Emergency,CIRC,0,0,General Medicine,9.6
+PT000795,41,M,Emergency,CIRC,1,2,Cardiology,13.2
+PT000796,70,M,Urgent,INFX,0,0,General Medicine,10.4
+PT000797,75,M,Emergency,CIRC,2,0,Cardiology,15.3
+PT000798,39,F,Elective,CIRC,0,0,Emergency Medicine,4.5
+PT000799,71,M,Elective,NEUR,1,0,Neurology,12.3
+PT000800,48,F,Trauma,NEUR,1,0,Neurology,20.9
+PT000801,58,F,Emergency,ONCO,4,1,Oncology,33.4
+PT000802,85,F,Trauma,INFX,3,4,Emergency Medicine,21.9
+PT000803,73,M,Trauma,PSYC,1,1,General Medicine,25.8
+PT000804,73,M,Emergency,DIGE,2,3,Surgery,10.1
+PT000805,94,M,Trauma,CIRC,3,1,Cardiology,24.7
+PT000806,45,F,Urgent,CIRC,2,0,Cardiology,11.9
+PT000807,39,F,Elective,NEUR,1,0,Neurology,11.1
+PT000808,44,M,Elective,RESP,2,0,Pulmonology,6.0
+PT000809,53,F,Elective,MUSC,4,2,Surgery,7.2
+PT000810,13,M,Elective,OBST,0,1,Surgery,3.2
+PT000811,54,M,Urgent,CIRC,2,1,Cardiology,13.5
+PT000812,48,M,Emergency,CIRC,1,1,General Medicine,11.4
+PT000813,73,F,Emergency,OBST,1,2,Surgery,5.2
+PT000814,65,M,Emergency,DIGE,1,1,Surgery,7.4
+PT000815,47,M,Elective,CIRC,0,1,Cardiology,6.2
+PT000816,69,F,Emergency,PSYC,2,0,Neurology,29.0
+PT000817,72,F,Urgent,TRMA,4,2,Surgery,24.4
+PT000818,43,M,Elective,MUSC,0,0,Surgery,4.0
+PT000819,49,M,Urgent,DIGE,4,3,General Medicine,9.0
+PT000820,16,F,Urgent,RESP,0,1,Pulmonology,7.7
+PT000821,37,M,Urgent,CIRC,2,0,General Medicine,9.7
+PT000822,44,M,Emergency,DIGE,1,1,General Medicine,6.8
+PT000823,59,F,Emergency,RESP,2,2,Emergency Medicine,10.2
+PT000824,40,M,Emergency,NEUR,0,2,Neurology,17.1
+PT000825,48,F,Elective,TRMA,2,1,Emergency Medicine,7.9
+PT000826,35,M,Emergency,CIRC,3,0,Cardiology,14.2
+PT000827,61,M,Emergency,DIGE,3,1,General Medicine,9.8
+PT000828,66,M,Elective,RESP,1,0,General Medicine,7.0
+PT000829,66,M,Emergency,TRMA,1,1,Orthopedics,13.7
+PT000830,58,M,Emergency,RESP,1,3,General Medicine,11.0
+PT000831,29,M,Urgent,DIGE,0,0,General Medicine,4.3
+PT000832,46,F,Elective,DIGE,2,2,General Medicine,4.9
+PT000833,50,F,Emergency,INFX,8,4,Emergency Medicine,24.7
+PT000834,50,M,Elective,NEUR,4,2,Neurology,17.7
+PT000835,59,F,Elective,NEUR,3,2,Neurology,16.8
+PT000836,85,F,Elective,DIGE,4,5,Surgery,9.2
+PT000837,1,F,Newborn,ONCO,0,0,Surgery,6.1
+PT000838,39,M,Urgent,OBST,1,0,Emergency Medicine,2.9
+PT000839,71,M,Urgent,INFX,2,1,Pulmonology,15.8
+PT000840,70,M,Urgent,MUSC,2,2,Orthopedics,7.0
+PT000841,43,M,Trauma,CIRC,1,2,General Medicine,13.5
+PT000842,74,M,Emergency,ONCO,1,2,Surgery,22.2
+PT000843,55,F,Trauma,MUSC,4,1,Orthopedics,11.4
+PT000844,31,F,Urgent,INFX,2,2,General Medicine,13.4
+PT000845,67,M,Elective,CIRC,0,1,Cardiology,7.4
+PT000846,62,M,Emergency,TRMA,0,0,Surgery,14.0
+PT000847,54,M,Urgent,INFX,2,3,General Medicine,14.7
+PT000848,57,F,Emergency,NEUR,3,0,Neurology,24.3
+PT000849,44,F,Trauma,CIRC,0,0,Cardiology,11.1
+PT000850,70,M,Emergency,OBST,3,1,General Medicine,6.1
+PT000851,1,F,Newborn,RESP,0,2,Pulmonology,3.9
+PT000852,61,F,Emergency,RESP,0,0,Pulmonology,8.6
+PT000853,65,F,Urgent,TRMA,2,1,Orthopedics,13.7
+PT000854,36,F,Emergency,PSYC,2,1,General Medicine,20.3
+PT000855,41,F,Elective,RESP,1,1,Pulmonology,5.9
+PT000856,16,M,Emergency,MUSC,0,0,Orthopedics,5.4
+PT000857,69,M,Elective,ONCO,2,1,Surgery,14.5
+PT000858,35,F,Urgent,TRMA,3,0,Emergency Medicine,11.6
+PT000859,61,M,Emergency,INFX,0,1,Emergency Medicine,9.8
+PT000860,65,F,Elective,MUSC,1,0,Orthopedics,2.5
+PT000861,69,M,Elective,ONCO,0,0,General Medicine,9.3
+PT000862,35,M,Emergency,ONCO,2,0,Oncology,25.2
+PT000863,57,M,Elective,ONCO,3,1,Surgery,15.4
+PT000864,90,F,Emergency,DIGE,1,2,Surgery,9.3
+PT000865,91,M,Urgent,CIRC,1,0,Cardiology,11.8
+PT000866,77,M,Elective,PSYC,1,0,Emergency Medicine,9.8
+PT000867,64,M,Elective,TRMA,2,1,Emergency Medicine,9.3
+PT000868,39,F,Emergency,ONCO,2,1,Surgery,22.1
+PT000869,1,U,Newborn,CIRC,0,0,Cardiology,3.3
+PT000870,55,M,Elective,RESP,2,2,Pulmonology,7.3
+PT000871,0,F,Newborn,ONCO,0,0,Oncology,7.4
+PT000872,46,M,Emergency,CIRC,2,2,Cardiology,14.3
+PT000873,55,F,Emergency,OBST,1,1,Surgery,4.1
+PT000874,61,M,Emergency,INFX,1,0,General Medicine,13.6
+PT000875,63,F,Emergency,NEUR,4,1,General Medicine,23.9
+PT000876,67,F,Emergency,TRMA,1,2,Emergency Medicine,13.6
+PT000877,47,F,Emergency,INFX,3,3,Pulmonology,20.3
+PT000878,32,M,Emergency,INFX,1,1,Pulmonology,12.9
+PT000879,89,F,Urgent,DIGE,1,1,General Medicine,7.3
+PT000880,100,F,Elective,DIGE,4,2,Surgery,9.1
+PT000881,67,M,Emergency,INFX,2,2,General Medicine,17.3
+PT000882,33,F,Elective,DIGE,0,1,Surgery,3.6
+PT000883,43,F,Urgent,PSYC,0,0,General Medicine,13.6
+PT000884,68,M,Elective,MUSC,3,2,Orthopedics,4.1
+PT000885,83,F,Elective,RESP,2,0,Pulmonology,8.7
+PT000886,35,M,Emergency,INFX,0,2,Pulmonology,12.6
+PT000887,56,F,Emergency,INFX,1,0,Emergency Medicine,10.3
+PT000888,62,M,Urgent,CIRC,2,2,Cardiology,13.9
+PT000889,74,M,Elective,CIRC,2,3,Cardiology,10.6
+PT000890,51,F,Urgent,NEUR,1,1,Emergency Medicine,11.3
+PT000891,28,F,Urgent,INFX,1,1,Pulmonology,11.3
+PT000892,70,F,Emergency,OBST,2,0,General Medicine,5.6
+PT000893,79,U,Emergency,RESP,3,1,Pulmonology,15.2
+PT000894,56,M,Emergency,CIRC,3,2,Cardiology,16.6
+PT000895,66,M,Emergency,ONCO,1,1,General Medicine,20.0
+PT000896,1,M,Newborn,TRMA,0,4,Emergency Medicine,4.4
+PT000897,42,M,Emergency,RESP,3,1,Pulmonology,12.8
+PT000898,78,F,Emergency,RESP,5,3,Pulmonology,21.7
+PT000899,65,F,Emergency,RESP,1,0,General Medicine,9.6
+PT000900,67,F,Elective,MUSC,2,1,Orthopedics,4.5
+PT000901,1,M,Newborn,MUSC,0,1,Surgery,2.8
+PT000902,38,M,Urgent,RESP,1,2,Pulmonology,8.3
+PT000903,48,F,Urgent,CIRC,4,2,Emergency Medicine,11.9
+PT000904,1,M,Newborn,MUSC,1,0,Orthopedics,2.0
+PT000905,47,M,Emergency,OBST,1,1,General Medicine,5.0
+PT000906,73,M,Elective,NEUR,0,0,Neurology,11.1
+PT000907,54,M,Elective,MUSC,1,1,Surgery,5.1
+PT000908,39,M,Elective,CIRC,2,1,Cardiology,7.6
+PT000909,59,F,Emergency,RESP,3,0,Pulmonology,12.9
+PT000910,61,M,Elective,RESP,4,3,General Medicine,9.0
+PT000911,76,F,Trauma,ONCO,4,3,Oncology,49.2
+PT000912,65,F,Trauma,TRMA,4,2,Emergency Medicine,19.9
+PT000913,67,F,Emergency,PSYC,0,0,General Medicine,16.6
+PT000914,64,M,Emergency,OBST,2,0,Surgery,6.2
+PT000915,54,M,Urgent,OBST,2,2,Surgery,5.4
+PT000916,44,M,Elective,OBST,2,0,Surgery,3.0
+PT000917,63,M,Emergency,CIRC,0,1,General Medicine,9.8
+PT000918,52,M,Elective,CIRC,0,1,Emergency Medicine,4.4
+PT000919,90,F,Elective,RESP,1,4,General Medicine,8.5
+PT000920,84,M,Urgent,DIGE,2,2,Surgery,9.0
+PT000921,70,M,Elective,CIRC,1,1,Cardiology,9.0
+PT000922,65,M,Urgent,TRMA,2,2,Emergency Medicine,13.0
+PT000923,56,F,Emergency,DIGE,7,1,Surgery,13.8
+PT000924,34,F,Emergency,DIGE,3,2,Surgery,8.7
+PT000925,54,F,Emergency,CIRC,1,1,General Medicine,11.3
+PT000926,60,F,Trauma,RESP,2,3,General Medicine,14.4
+PT000927,62,F,Urgent,CIRC,2,1,Emergency Medicine,9.3
+PT000928,67,F,Trauma,TRMA,2,1,Emergency Medicine,16.1
+PT000929,76,M,Emergency,DIGE,1,0,Surgery,8.1
+PT000930,45,F,Elective,ONCO,2,0,General Medicine,12.7
+PT000931,0,F,Newborn,RESP,0,1,Pulmonology,3.5
+PT000932,86,M,Urgent,INFX,2,2,General Medicine,17.8
+PT000933,73,F,Elective,INFX,1,0,Emergency Medicine,7.6
+PT000934,51,F,Urgent,ONCO,0,0,Surgery,14.9
+PT000935,56,F,Urgent,ONCO,2,1,Oncology,23.8
+PT000936,56,M,Urgent,RESP,2,1,General Medicine,9.9
+PT000937,59,F,Emergency,PSYC,0,0,General Medicine,16.8
+PT000938,67,F,Trauma,CIRC,1,0,General Medicine,13.2
+PT000939,100,M,Urgent,PSYC,3,1,General Medicine,30.3
+PT000940,62,M,Emergency,CIRC,2,1,Cardiology,15.0
+PT000941,71,M,Urgent,RESP,4,4,Pulmonology,17.2
+PT000942,26,M,Emergency,TRMA,1,1,Emergency Medicine,10.8
+PT000943,49,U,Elective,RESP,2,1,Pulmonology,7.6
+PT000944,81,F,Elective,INFX,2,3,General Medicine,12.7
+PT000945,66,M,Emergency,MUSC,1,2,Orthopedics,7.6
+PT000946,0,M,Emergency,RESP,0,0,Pulmonology,7.2
+PT000947,71,U,Emergency,NEUR,5,1,General Medicine,29.6
+PT000948,94,M,Emergency,TRMA,4,4,Emergency Medicine,25.1
+PT000949,20,F,Emergency,TRMA,1,2,Emergency Medicine,11.5
+PT000950,87,M,Urgent,INFX,3,1,Pulmonology,20.0
+PT000951,5,M,Elective,MUSC,1,4,Surgery,4.0
+PT000952,76,F,Elective,RESP,2,2,Pulmonology,8.8
+PT000953,58,M,Elective,RESP,2,0,Pulmonology,6.4
+PT000954,13,F,Urgent,CIRC,1,1,Cardiology,9.5
+PT000955,66,M,Emergency,PSYC,2,1,General Medicine,23.7
+PT000956,80,F,Urgent,TRMA,1,2,Emergency Medicine,12.2
+PT000957,65,F,Emergency,ONCO,1,1,Surgery,20.9
+PT000958,69,F,Emergency,MUSC,4,1,Orthopedics,9.8
+PT000959,50,M,Emergency,MUSC,0,0,Orthopedics,5.0
+PT000960,23,F,Emergency,MUSC,0,0,Surgery,6.3
+PT000961,71,U,Urgent,MUSC,1,1,General Medicine,6.7
+PT000962,91,M,Urgent,MUSC,4,2,Orthopedics,12.0
+PT000963,79,M,Emergency,CIRC,1,2,Cardiology,15.1
+PT000964,20,F,Emergency,CIRC,0,2,Cardiology,9.8
+PT000965,29,M,Urgent,OBST,0,0,Surgery,2.8
+PT000966,42,F,Urgent,MUSC,0,0,Orthopedics,5.1
+PT000967,28,F,Emergency,OBST,1,1,General Medicine,4.1
+PT000968,59,M,Emergency,CIRC,0,0,Emergency Medicine,7.2
+PT000969,65,F,Elective,DIGE,5,1,General Medicine,7.2
+PT000970,31,F,Urgent,RESP,1,0,Pulmonology,7.9
+PT000971,73,M,Trauma,RESP,5,1,General Medicine,20.9
+PT000972,69,F,Elective,CIRC,3,2,Emergency Medicine,8.4
+PT000973,48,M,Trauma,CIRC,1,0,Cardiology,13.8
+PT000974,55,M,Elective,PSYC,1,1,Emergency Medicine,11.2
+PT000975,21,F,Emergency,INFX,1,4,Pulmonology,14.0
+PT000976,52,M,Urgent,DIGE,1,0,Emergency Medicine,4.3
+PT000977,58,F,Elective,MUSC,0,1,Surgery,4.2
+PT000978,61,M,Trauma,INFX,2,1,Pulmonology,20.4
+PT000979,65,F,Urgent,MUSC,0,0,Surgery,7.0
+PT000980,0,M,Newborn,RESP,1,0,Pulmonology,4.4
+PT000981,53,F,Urgent,OBST,1,2,Emergency Medicine,3.1
+PT000982,63,F,Trauma,TRMA,3,2,Surgery,24.5
+PT000983,77,F,Trauma,ONCO,0,0,Oncology,24.3
+PT000984,56,U,Emergency,MUSC,0,0,Orthopedics,5.1
+PT000985,64,F,Elective,CIRC,4,5,General Medicine,12.7
+PT000986,54,F,Emergency,PSYC,2,2,General Medicine,23.7
+PT000987,46,F,Emergency,INFX,1,1,General Medicine,13.6
+PT000988,0,F,Newborn,CIRC,2,1,Cardiology,5.8
+PT000989,47,F,Urgent,INFX,2,2,General Medicine,13.3
+PT000990,65,F,Urgent,ONCO,3,0,Surgery,22.0
+PT000991,59,M,Elective,DIGE,1,0,Surgery,3.9
+PT000992,52,F,Emergency,ONCO,3,1,Surgery,25.3
+PT000993,1,F,Newborn,ONCO,0,1,Surgery,6.2
+PT000994,48,M,Elective,RESP,0,0,Pulmonology,4.9
+PT000995,27,M,Emergency,PSYC,0,0,General Medicine,15.3
+PT000996,65,F,Trauma,MUSC,2,1,Orthopedics,8.9
+PT000997,62,M,Elective,DIGE,3,3,Emergency Medicine,4.8
+PT000998,74,M,Elective,CIRC,4,4,Emergency Medicine,10.8
+PT000999,48,M,Emergency,OBST,2,5,Surgery,6.2
+PT001000,94,M,Emergency,RESP,2,4,Pulmonology,17.5
+PT001001,51,F,Elective,CIRC,2,1,Cardiology,8.7
+PT001002,41,F,Emergency,MUSC,3,5,Orthopedics,9.3
+PT001003,39,U,Emergency,CIRC,1,2,Emergency Medicine,9.0
+PT001004,25,F,Trauma,CIRC,3,4,General Medicine,16.8
+PT001005,87,F,Trauma,DIGE,0,0,Surgery,9.1
+PT001006,84,M,Emergency,INFX,1,0,General Medicine,15.4
+PT001007,69,F,Emergency,PSYC,4,1,General Medicine,29.1
+PT001008,41,M,Urgent,INFX,0,1,General Medicine,10.5
+PT001009,92,M,Emergency,NEUR,1,1,General Medicine,19.7
+PT001010,51,F,Elective,MUSC,2,2,General Medicine,5.5
+PT001011,53,F,Emergency,NEUR,0,0,Neurology,16.4
+PT001012,85,M,Elective,DIGE,3,4,Emergency Medicine,6.7
+PT001013,71,F,Emergency,MUSC,1,1,Orthopedics,6.9
+PT001014,100,M,Elective,OBST,2,1,General Medicine,4.9
+PT001015,63,M,Urgent,INFX,0,1,General Medicine,10.3
+PT001016,50,M,Elective,RESP,2,0,Pulmonology,6.7
+PT001017,46,M,Emergency,NEUR,1,0,General Medicine,15.9
+PT001018,23,F,Emergency,TRMA,1,1,Emergency Medicine,11.1
+PT001019,53,M,Elective,CIRC,2,1,Cardiology,10.0
+PT001020,80,F,Trauma,MUSC,2,1,Orthopedics,9.7
+PT001021,69,M,Trauma,PSYC,1,1,General Medicine,24.0
+PT001022,58,F,Urgent,ONCO,4,0,General Medicine,23.0
+PT001023,39,F,Emergency,OBST,1,0,Surgery,3.8
+PT001024,62,F,Urgent,MUSC,0,0,General Medicine,4.7
+PT001025,77,M,Elective,NEUR,3,1,General Medicine,14.1
+PT001026,66,F,Emergency,RESP,0,1,Pulmonology,9.9
+PT001027,61,F,Elective,PSYC,0,0,General Medicine,9.5
+PT001028,43,M,Trauma,INFX,2,1,General Medicine,17.6
+PT001029,74,M,Trauma,ONCO,3,0,Oncology,38.1
+PT001030,0,M,Emergency,INFX,0,0,General Medicine,10.5
+PT001031,65,M,Emergency,DIGE,2,0,Emergency Medicine,7.0
+PT001032,100,M,Emergency,NEUR,0,0,Emergency Medicine,14.3
+PT001033,0,M,Newborn,MUSC,0,3,Orthopedics,3.0
+PT001034,53,M,Urgent,PSYC,1,1,General Medicine,17.7
+PT001035,58,F,Elective,INFX,2,0,Pulmonology,9.6
+PT001036,49,M,Emergency,NEUR,2,1,Emergency Medicine,14.4
+PT001037,78,M,Urgent,INFX,3,3,Emergency Medicine,15.8
+PT001038,67,F,Urgent,INFX,3,1,General Medicine,16.1
+PT001039,61,M,Elective,MUSC,1,1,Orthopedics,4.2
+PT001040,73,M,Emergency,CIRC,1,0,Cardiology,12.3
+PT001041,58,M,Urgent,CIRC,3,2,General Medicine,13.3
+PT001042,100,M,Elective,NEUR,5,2,Neurology,27.7
+PT001043,61,M,Elective,NEUR,3,1,Neurology,16.2
+PT001044,62,M,Urgent,NEUR,2,1,Neurology,21.3
+PT001045,26,M,Trauma,CIRC,0,2,Cardiology,12.1
+PT001046,48,U,Urgent,INFX,1,0,Pulmonology,11.5
+PT001047,80,F,Emergency,RESP,3,1,Pulmonology,14.8
+PT001048,33,M,Emergency,ONCO,2,1,Oncology,26.0
+PT001049,17,M,Urgent,TRMA,0,1,Emergency Medicine,7.6
+PT001050,59,M,Emergency,RESP,3,2,Pulmonology,14.7
+PT001051,84,F,Emergency,NEUR,6,2,Neurology,45.7
+PT001052,59,F,Emergency,CIRC,2,1,Cardiology,14.1
+PT001053,52,M,Elective,RESP,2,2,General Medicine,7.5
+PT001054,23,M,Elective,CIRC,0,0,Emergency Medicine,4.9
+PT001055,1,M,Newborn,RESP,1,2,Emergency Medicine,3.7
+PT001056,71,F,Emergency,NEUR,1,2,Neurology,21.9
+PT001057,24,F,Trauma,PSYC,0,0,Neurology,20.6
+PT001058,80,M,Trauma,RESP,5,3,Pulmonology,23.8
+PT001059,73,F,Elective,DIGE,1,1,Surgery,5.3
+PT001060,80,M,Emergency,NEUR,0,0,Emergency Medicine,12.5
+PT001061,69,F,Urgent,OBST,1,0,Surgery,3.0
+PT001062,70,F,Emergency,DIGE,2,2,General Medicine,8.6
+PT001063,68,M,Elective,RESP,3,2,General Medicine,8.9
+PT001064,75,M,Urgent,DIGE,1,1,Emergency Medicine,5.6
+PT001065,23,F,Emergency,INFX,1,3,Pulmonology,14.5
+PT001066,29,M,Emergency,OBST,1,1,General Medicine,4.1
+PT001067,44,F,Emergency,INFX,2,1,General Medicine,14.8
+PT001068,56,M,Urgent,NEUR,3,2,Neurology,23.5
+PT001069,65,F,Urgent,CIRC,2,1,Cardiology,13.2
+PT001070,1,M,Newborn,INFX,0,2,General Medicine,5.0
+PT001071,79,M,Urgent,TRMA,1,1,Emergency Medicine,12.3
+PT001072,80,M,Urgent,DIGE,4,3,Emergency Medicine,9.2
+PT001073,41,M,Emergency,MUSC,0,2,Orthopedics,6.3
+PT001074,63,M,Urgent,PSYC,1,1,General Medicine,17.8
+PT001075,42,F,Emergency,TRMA,3,0,Surgery,18.0
+PT001076,54,M,Urgent,INFX,1,1,Pulmonology,13.0
+PT001077,64,M,Emergency,DIGE,2,0,Emergency Medicine,6.5
+PT001078,0,M,Trauma,MUSC,0,0,Orthopedics,5.3
+PT001079,100,M,Trauma,DIGE,3,2,Surgery,14.7
+PT001080,69,F,Emergency,INFX,0,0,Emergency Medicine,10.9
+PT001081,47,F,Urgent,RESP,0,0,Emergency Medicine,6.1
+PT001082,95,M,Emergency,PSYC,4,2,General Medicine,38.8
+PT001083,51,F,Emergency,PSYC,4,2,Neurology,35.8
+PT001084,61,F,Emergency,TRMA,2,3,Emergency Medicine,16.0
+PT001085,49,U,Emergency,OBST,3,1,Surgery,5.7
+PT001086,89,M,Emergency,ONCO,3,2,Oncology,41.1
+PT001087,56,M,Emergency,ONCO,0,0,Oncology,19.9
+PT001088,61,M,Emergency,ONCO,0,1,Oncology,22.4
+PT001089,81,F,Elective,MUSC,0,0,Orthopedics,3.6
+PT001090,69,F,Emergency,MUSC,2,1,Orthopedics,8.7
+PT001091,57,M,Emergency,RESP,2,1,Emergency Medicine,9.1
+PT001092,79,M,Elective,NEUR,3,1,Neurology,18.2
+PT001093,100,F,Trauma,RESP,1,3,General Medicine,16.5
+PT001094,64,F,Emergency,RESP,2,1,Emergency Medicine,10.0
+PT001095,60,M,Elective,DIGE,1,2,Surgery,5.4
+PT001096,61,F,Emergency,INFX,3,3,Pulmonology,20.6
+PT001097,83,M,Emergency,RESP,2,3,Emergency Medicine,12.0
+PT001098,47,M,Emergency,TRMA,0,0,Emergency Medicine,10.5
+PT001099,53,F,Urgent,TRMA,1,2,Orthopedics,11.5
+PT001100,29,F,Trauma,CIRC,1,1,Cardiology,13.6
+PT001101,36,F,Urgent,CIRC,0,0,Cardiology,8.6
+PT001102,48,M,Emergency,INFX,1,1,Emergency Medicine,11.4
+PT001103,57,M,Elective,ONCO,3,1,Oncology,18.9
+PT001104,92,M,Emergency,TRMA,3,4,Emergency Medicine,22.0
+PT001105,68,M,Emergency,CIRC,1,2,Cardiology,14.0
+PT001106,41,M,Emergency,ONCO,3,1,Oncology,29.5
+PT001107,44,M,Emergency,CIRC,1,1,Emergency Medicine,9.1
+PT001108,84,M,Emergency,INFX,3,1,Emergency Medicine,18.3
+PT001109,79,M,Emergency,OBST,1,0,Surgery,5.9
+PT001110,59,M,Urgent,RESP,1,2,General Medicine,9.4
+PT001111,1,F,Newborn,CIRC,0,1,Cardiology,3.8
+PT001112,79,M,Emergency,INFX,0,1,General Medicine,12.9
+PT001113,0,F,Newborn,DIGE,0,1,General Medicine,3.2
+PT001114,1,F,Newborn,PSYC,0,0,Emergency Medicine,4.6
+PT001115,100,F,Trauma,OBST,3,2,Surgery,10.3
+PT001116,62,M,Emergency,CIRC,0,0,Cardiology,11.1
+PT001117,43,M,Emergency,CIRC,2,1,Cardiology,13.9
+PT001118,66,F,Elective,ONCO,2,3,Oncology,18.5
+PT001119,49,F,Emergency,RESP,1,0,Pulmonology,9.5
+PT001120,32,M,Emergency,TRMA,1,0,Orthopedics,11.3
+PT001121,71,M,Emergency,NEUR,1,0,General Medicine,16.5
+PT001122,79,F,Trauma,CIRC,1,0,Emergency Medicine,12.1
+PT001123,52,M,Elective,TRMA,1,1,Surgery,9.7
+PT001124,51,F,Urgent,RESP,0,0,Pulmonology,7.2
+PT001125,40,M,Emergency,INFX,1,0,Pulmonology,13.4
+PT001126,55,M,Urgent,DIGE,1,0,General Medicine,6.2
+PT001127,47,F,Elective,MUSC,2,0,Surgery,5.1
+PT001128,39,M,Elective,NEUR,2,0,Neurology,13.1
+PT001129,94,F,Emergency,NEUR,1,0,Neurology,23.3
+PT001130,67,M,Emergency,OBST,3,4,Emergency Medicine,6.3
+PT001131,69,M,Elective,OBST,1,2,Surgery,3.4
+PT001132,75,F,Elective,MUSC,3,1,Surgery,7.1
+PT001133,73,M,Emergency,CIRC,2,1,Cardiology,15.9
+PT001134,50,M,Elective,NEUR,4,1,Emergency Medicine,10.6
+PT001135,63,F,Emergency,OBST,3,3,Surgery,6.4
+PT001136,53,F,Emergency,INFX,0,0,General Medicine,11.2
+PT001137,66,F,Elective,MUSC,1,0,Orthopedics,4.3
+PT001138,64,M,Emergency,INFX,0,2,Emergency Medicine,10.3
+PT001139,51,M,Elective,CIRC,2,2,Emergency Medicine,5.9
+PT001140,33,F,Urgent,NEUR,4,0,Neurology,21.5
+PT001141,61,M,Trauma,INFX,1,0,General Medicine,15.3
+PT001142,54,M,Emergency,ONCO,4,0,General Medicine,24.8
+PT001143,22,F,Trauma,TRMA,0,0,Emergency Medicine,10.2
+PT001144,68,M,Elective,TRMA,1,2,Emergency Medicine,8.6
+PT001145,76,M,Urgent,INFX,3,1,General Medicine,18.4
+PT001146,100,M,Emergency,INFX,3,0,Emergency Medicine,19.7
+PT001147,51,M,Emergency,ONCO,2,3,Oncology,28.9
+PT001148,0,F,Newborn,ONCO,0,2,General Medicine,5.8
+PT001149,37,F,Elective,MUSC,0,0,Orthopedics,3.5
+PT001150,62,M,Trauma,PSYC,3,4,General Medicine,33.5
+PT001151,62,M,Trauma,CIRC,4,3,General Medicine,20.9
+PT001152,43,F,Emergency,TRMA,2,0,Surgery,16.9
+PT001153,55,M,Urgent,CIRC,2,1,General Medicine,12.2
+PT001154,20,F,Emergency,CIRC,0,0,Emergency Medicine,7.4
+PT001155,76,F,Urgent,MUSC,8,2,Orthopedics,15.2
+PT001156,43,F,Emergency,CIRC,1,0,General Medicine,10.4
+PT001157,57,M,Emergency,CIRC,2,2,Emergency Medicine,11.2
+PT001158,31,U,Trauma,CIRC,1,1,Cardiology,13.3
+PT001159,47,M,Emergency,MUSC,0,1,General Medicine,5.6
+PT001160,53,F,Emergency,ONCO,2,1,Oncology,28.2
+PT001161,58,F,Emergency,CIRC,0,0,General Medicine,10.0
+PT001162,67,F,Emergency,NEUR,2,0,Neurology,22.7
+PT001163,85,F,Trauma,TRMA,1,1,Orthopedics,17.9
+PT001164,72,F,Elective,CIRC,1,0,Cardiology,7.8
+PT001165,1,M,Newborn,CIRC,0,0,Cardiology,3.0
+PT001166,85,M,Emergency,TRMA,2,3,Emergency Medicine,18.5
+PT001167,69,F,Trauma,TRMA,1,1,Emergency Medicine,13.9
+PT001168,57,F,Emergency,MUSC,1,0,Orthopedics,6.3
+PT001169,77,M,Emergency,TRMA,0,2,Emergency Medicine,12.2
+PT001170,78,F,Urgent,CIRC,2,1,Emergency Medicine,10.8
+PT001171,70,F,Emergency,INFX,0,0,General Medicine,12.6
+PT001172,30,M,Elective,ONCO,3,3,Oncology,19.1
+PT001173,42,M,Urgent,RESP,3,1,Pulmonology,11.5
+PT001174,53,M,Urgent,ONCO,0,1,Oncology,17.8
+PT001175,73,M,Urgent,MUSC,1,2,Surgery,8.2
+PT001176,58,M,Urgent,ONCO,0,0,Oncology,16.9
+PT001177,80,M,Emergency,MUSC,1,0,Orthopedics,7.9
+PT001178,83,M,Urgent,INFX,4,1,Pulmonology,21.1
+PT001179,81,M,Emergency,RESP,2,2,Pulmonology,14.3
+PT001180,81,F,Elective,RESP,3,1,Pulmonology,8.9
+PT001181,38,M,Emergency,ONCO,1,2,Oncology,23.7
+PT001182,67,U,Emergency,CIRC,0,1,Emergency Medicine,8.5
+PT001183,46,F,Urgent,CIRC,1,0,General Medicine,9.0
+PT001184,27,F,Emergency,RESP,0,0,Pulmonology,8.5
+PT001185,53,F,Trauma,RESP,3,3,Pulmonology,16.6
+PT001186,83,F,Emergency,TRMA,7,4,Emergency Medicine,32.0
+PT001187,67,M,Urgent,INFX,3,1,General Medicine,16.0
+PT001188,96,F,Emergency,OBST,4,1,Surgery,10.0
+PT001189,61,M,Emergency,CIRC,2,0,Cardiology,14.7
+PT001190,100,F,Urgent,NEUR,3,1,Neurology,29.5
+PT001191,61,F,Emergency,MUSC,1,0,Surgery,7.6
+PT001192,58,M,Urgent,INFX,1,2,Emergency Medicine,10.8
+PT001193,34,M,Emergency,TRMA,1,0,Surgery,14.5
+PT001194,79,F,Elective,OBST,3,1,Surgery,4.0
+PT001195,48,M,Elective,TRMA,0,0,Emergency Medicine,6.4
+PT001196,0,M,Newborn,RESP,0,1,Pulmonology,2.9
+PT001197,82,M,Trauma,RESP,2,2,General Medicine,16.4
+PT001198,80,M,Trauma,NEUR,2,3,Emergency Medicine,21.9
+PT001199,0,F,Newborn,RESP,0,0,Pulmonology,2.7
+PT001200,51,F,Urgent,ONCO,1,1,Oncology,20.6
