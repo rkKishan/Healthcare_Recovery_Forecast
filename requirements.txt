@@ -38,4 +38,8 @@ matplotlib==3.11.1
 
 # MySQL driver — only needed when DATABASE_URL points at MySQL
 PyMySQL==1.2.0
+
+# Postgres driver, for a managed database such as Neon or Render Postgres.
+# DATABASE_URL then looks like postgresql+psycopg://user:pass@host/db
+psycopg[binary]==3.2.12
 groq>=1.7,<2
