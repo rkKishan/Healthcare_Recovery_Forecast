@@ -16,13 +16,11 @@ services:
     # Closest region to India of the five Render offers.
     region: singapore
     branch: main
-    dockerfilePath: ./Dockerfile
-    # Pinned explicitly. Left unset, the build resolved its context to the
-    # Dockerfile's own path and failed before starting:
+    # Neither dockerfilePath nor dockerContext is set. Render already
+    # defaults to ./Dockerfile at the repo root, which is exactly where this
+    # one lives, and stating them explicitly produced a build whose context
+    # resolved to the Dockerfile itself:
     #   invalid local: stat /opt/render/project/src/Dockerfile: not a directory
-    # The context has to be the repo root -- the build copies frontend/,
-    # backend/, ml/ and migrations/ out of it.
-    dockerContext: .
 
     # Render restarts the instance if this stops returning 200, which is what
     # catches a container whose model failed to load.
