@@ -32,14 +32,19 @@ RUN python -m ml.train --rows 24000
 
 # Run as an unprivileged user. Root in a container is root on the host if the
 # runtime is ever escaped, and nothing here needs those privileges.
-RUN useradd --create-home --uid 10001 appuser \
+# UID 1000 specifically: Hugging Face Spaces runs the container as that user
+# and does not remap it, so anything owned by another uid is unwritable there.
+# Any host can run this; only HF is fussy about the number.
+RUN useradd --create-home --uid 1000 appuser \
     && chown -R appuser:appuser /app
 USER appuser
 
-# Render (and most PaaS) inject the port to listen on as $PORT and route to
-# it; EXPOSE is only metadata. The CMD honours $PORT when set and falls back
-# to 2800 so local `docker run` is unchanged.
-EXPOSE 2800
+# 7860 is what Hugging Face Spaces routes to by default (and what `app_port`
+# in README.md declares); it injects no PORT variable, so the image has to
+# default to it. A platform that does inject one -- Render, Fly, Cloud Run --
+# overrides this at runtime, because runtime environment beats image ENV.
+ENV PORT=7860
+EXPOSE 7860
 
 # Lets the orchestrator restart a container whose model failed to load rather
 # than leaving it serving 503s.

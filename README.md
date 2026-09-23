@@ -1,3 +1,15 @@
+---
+title: Healthcare Recovery Forecast
+emoji: 🏥
+colorFrom: indigo
+colorTo: blue
+sdk: docker
+app_port: 7860
+pinned: false
+license: mit
+short_description: Hospital length-of-stay forecasting with SHAP explanations
+---
+
 # Healthcare Recovery Forecast & Hospital Bed Management System
 
 Predicts patient **length of stay (LOS)** and a **five-tier discharge-risk
@@ -473,3 +485,7 @@ colour, carries the meaning.
 - The forecast treats an uploaded cohort as newly admitted. A true current
   census would need admission dates, which the schema does not carry.
 - This is a decision-support demo, not a medical device.
+<!-- # to run backend pkill -f "backend.app"
+cd /Users/kishanbhumi/Desktop/healthcare-recovery-forecast
+source .venv/bin/activate
+python -m backend.app -->
