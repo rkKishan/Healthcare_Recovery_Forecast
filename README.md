@@ -1,15 +1,3 @@
----
-title: Healthcare Recovery Forecast
-emoji: 🏥
-colorFrom: indigo
-colorTo: blue
-sdk: docker
-app_port: 7860
-pinned: false
-license: mit
-short_description: Hospital length-of-stay forecasting with SHAP explanations
----
-
 # Healthcare Recovery Forecast & Hospital Bed Management System
 
 Predicts patient **length of stay (LOS)** and a **five-tier discharge-risk
