@@ -17,6 +17,12 @@ services:
     region: singapore
     branch: main
     dockerfilePath: ./Dockerfile
+    # Pinned explicitly. Left unset, the build resolved its context to the
+    # Dockerfile's own path and failed before starting:
+    #   invalid local: stat /opt/render/project/src/Dockerfile: not a directory
+    # The context has to be the repo root -- the build copies frontend/,
+    # backend/, ml/ and migrations/ out of it.
+    dockerContext: .
 
     # Render restarts the instance if this stops returning 200, which is what
     # catches a container whose model failed to load.
