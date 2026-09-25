@@ -134,6 +134,19 @@ class Config:
         if o.strip()
     ]
 
+    # --- administrators -------------------------------------------------
+    # Admin is granted by this list and nothing else. It is server-side
+    # configuration, so it cannot be influenced by anything a registrant
+    # sends -- which is the whole reason `admin` is absent from the role
+    # picker. An address here becomes an administrator when it registers, and
+    # an existing account is promoted the next time it signs in, so the list
+    # can be edited without touching the database.
+    ADMIN_EMAILS = [
+        e.strip().lower()
+        for e in os.getenv("ADMIN_EMAILS", "").split(",")
+        if e.strip()
+    ]
+
     # --- demo seed accounts -------------------------------------------
     # One per role, so both dashboards can be opened on a fresh checkout
     # without anyone having to register first.

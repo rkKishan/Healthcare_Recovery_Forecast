@@ -37,6 +37,11 @@ services:
       - key: DATABASE_URL
         sync: false
 
+      # Comma-separated addresses that get the admin role. This is the only
+      # way to become an administrator -- nothing in a request can grant it.
+      - key: ADMIN_EMAILS
+        sync: false
+
       - key: GROQ_API_KEY
         sync: false
 

@@ -14,6 +14,7 @@ from backend.roles import (
     ADMIN,
     ANALYST,
     CAPABILITIES,
+    DEFAULT_ROLE,
     DOCTOR,
     SELF_SELECTABLE,
     capabilities_for,
@@ -207,3 +208,116 @@ class TestScopingBeatsRole:
             headers=doctor_headers,
         )
         assert response.status_code == 404
+
+
+class TestAdminAllowlist:
+    """
+    Admin is granted by server configuration and nothing else.
+
+    The demo seed put an `admin` account with a published password into a
+    live database, so the list replaces seeding as the way anyone becomes an
+    administrator -- and being server-side, no request can reach it.
+    """
+
+    @staticmethod
+    def _app(app, emails):
+        app.config["ADMIN_EMAILS"] = [e.lower() for e in emails]
+        return app
+
+    def test_a_listed_address_registers_as_admin(self, client, app):
+        self._app(app, ["boss@hospital.org"])
+        body = client.post(
+            "/api/auth/register",
+            json={
+                "email": "boss@hospital.org",
+                "password": "a-good-password",
+                "full_name": "The Boss",
+                "role": DOCTOR,
+            },
+        ).get_json()
+        assert body["user"]["role"] == ADMIN
+
+    def test_an_unlisted_address_cannot_ask_for_admin(self, client, app):
+        self._app(app, ["boss@hospital.org"])
+        body = client.post(
+            "/api/auth/register",
+            json={
+                "email": "nobody@hospital.org",
+                "password": "a-good-password",
+                "full_name": "Nobody",
+                "role": "admin",
+            },
+        ).get_json()
+        assert body["user"]["role"] == DEFAULT_ROLE
+
+    def test_the_match_ignores_case_and_padding(self, client, app):
+        self._app(app, ["boss@hospital.org"])
+        body = client.post(
+            "/api/auth/register",
+            json={
+                "email": "  BOSS@Hospital.ORG ",
+                "password": "a-good-password",
+                "full_name": "The Boss",
+                "role": DOCTOR,
+            },
+        ).get_json()
+        assert body["user"]["role"] == ADMIN
+
+    def test_adding_an_address_promotes_on_next_sign_in(self, client, app):
+        """So the list can be edited without touching the database."""
+        client.post(
+            "/api/auth/register",
+            json={
+                "email": "later@hospital.org",
+                "password": "a-good-password",
+                "full_name": "Later Admin",
+                "role": DOCTOR,
+            },
+        )
+        self._app(app, ["later@hospital.org"])
+        body = client.post(
+            "/api/auth/login",
+            json={"email": "later@hospital.org", "password": "a-good-password"},
+        ).get_json()
+        assert body["user"]["role"] == ADMIN
+
+    def test_removing_an_address_demotes_on_next_sign_in(self, client, app):
+        self._app(app, ["temp@hospital.org"])
+        client.post(
+            "/api/auth/register",
+            json={
+                "email": "temp@hospital.org",
+                "password": "a-good-password",
+                "full_name": "Temp Admin",
+                "role": DOCTOR,
+            },
+        )
+        # Someone leaves the team.
+        self._app(app, ["someone.else@hospital.org"])
+        body = client.post(
+            "/api/auth/login",
+            json={"email": "temp@hospital.org", "password": "a-good-password"},
+        ).get_json()
+        assert body["user"]["role"] == DEFAULT_ROLE
+
+    def test_an_empty_list_changes_nobody(self, client, app):
+        """
+        Unconfigured means "not in use", not "nobody is an administrator" --
+        otherwise shipping this would strip admin from every existing install.
+        """
+        self._app(app, ["boss@hospital.org"])
+        client.post(
+            "/api/auth/register",
+            json={
+                "email": "boss@hospital.org",
+                "password": "a-good-password",
+                "full_name": "The Boss",
+                "role": DOCTOR,
+            },
+        )
+        self._app(app, [])
+        body = client.post(
+            "/api/auth/login",
+            json={"email": "boss@hospital.org", "password": "a-good-password"},
+        ).get_json()
+        assert body["user"]["role"] == ADMIN

@@ -105,6 +105,41 @@ def coerce_signup_role(value: object) -> str:
     return role if role in SELF_SELECTABLE else DEFAULT_ROLE
 
 
+def is_admin_email(email: object) -> bool:
+    """
+    Whether this address is configured as an administrator.
+
+    The list lives in the environment rather than the database so that
+    elevating someone is a deployment decision, reviewable in one place, and
+    never something a request can influence. An empty list -- the default --
+    means no account is an administrator, which is the right behaviour for a
+    deployment nobody has configured yet.
+    """
+    if not isinstance(email, str):
+        return False
+
+    from flask import current_app
+
+    try:
+        allowed = current_app.config.get("ADMIN_EMAILS") or []
+    except RuntimeError:  # outside an application context
+        return False
+    return email.strip().lower() in allowed
+
+
+def role_for_signup(email: object, requested: object) -> str:
+    """
+    The role a new account gets.
+
+    An allowlisted address becomes an administrator whatever it asked for;
+    everyone else goes through `coerce_signup_role`, which quietly drops a
+    request for "admin".
+    """
+    if is_admin_email(email):
+        return ADMIN
+    return coerce_signup_role(requested)
+
+
 def label(role: str) -> str:
     return ROLE_LABELS.get(normalise(role) or "", "User")
 

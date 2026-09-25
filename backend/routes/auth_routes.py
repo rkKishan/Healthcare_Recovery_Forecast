@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import logging
+
 from flask import Blueprint, current_app, g, request
 
 from ..auth import create_token, hash_password, requires_auth, verify_password
@@ -9,7 +11,9 @@ from ..errors import ApiError
 from ..google_auth import google_enabled, verify_google_token
 from ..models import User, db
 from ..ratelimit import limiter
-from ..roles import DEFAULT_ROLE, coerce_signup_role, public_roles
+from ..roles import ADMIN, DEFAULT_ROLE, is_admin_email, public_roles, role_for_signup
+
+logger = logging.getLogger(__name__)
 
 bp = Blueprint("auth", __name__, url_prefix="/api/auth")
 
@@ -19,7 +23,43 @@ bp = Blueprint("auth", __name__, url_prefix="/api/auth")
 LOGIN_HINT = "If you signed up with Google, use the Google button instead."
 
 
+def _sync_admin(user: User) -> None:
+    """
+    Reconcile one account's role with the ADMIN_EMAILS list.
+
+    Run whenever a session is minted, so the list is the whole truth about who
+    administers this deployment: adding an address promotes that person on
+    their next sign-in, and removing one demotes them, without anyone touching
+    the database. Demotion returns them to the default clinical role rather
+    than guessing which one they had before being elevated.
+
+    An empty list means the feature is unconfigured, not that nobody should
+    administer anything, so it promotes and demotes nobody -- otherwise
+    deploying this change would quietly strip admin from every existing
+    installation, including the seeded demo account on a laptop.
+
+    Only ever driven by server configuration -- nothing from the request
+    reaches this.
+    """
+    configured = current_app.config.get("ADMIN_EMAILS") or []
+    if not configured:
+        return
+
+    allowlisted = is_admin_email(user.email)
+
+    if allowlisted and user.role != ADMIN:
+        user.role = ADMIN
+    elif not allowlisted and user.role == ADMIN:
+        user.role = DEFAULT_ROLE
+    else:
+        return
+
+    db.session.commit()
+    logger.info("Role for %s is now %s (from ADMIN_EMAILS).", user.email, user.role)
+
+
 def _session(user: User, status: int = 200):
+    _sync_admin(user)
     token, expires_in = create_token(user)
     return {
         "access_token": token,
@@ -88,13 +128,15 @@ def register():
         raise ApiError("An account with that email already exists.", 409)
 
     # A registrant picks between the two clinical roles and nothing else:
-    # `coerce_signup_role` silently drops "admin" and anything unrecognised
-    # back to the default, so reaching /register can never mint a privileged
-    # account no matter what the body claims.
+    # `role_for_signup` silently drops "admin" and anything unrecognised back
+    # to the default, so reaching /register can never mint a privileged
+    # account no matter what the body claims. The one way to become an
+    # administrator is to be on the server's ADMIN_EMAILS list, which no
+    # request can reach.
     user = User(
         email=email,
         full_name=full_name,
-        role=coerce_signup_role(payload.get("role")),
+        role=role_for_signup(email, payload.get("role")),
         password_hash=hash_password(password),
         auth_provider="password",
     )
@@ -128,7 +170,7 @@ def google_login():
         user = User(
             email=email,
             full_name=str(claims.get("name") or "").strip() or email.split("@")[0],
-            role=coerce_signup_role(payload.get("role")),
+            role=role_for_signup(email, payload.get("role")),
             password_hash=None,
             auth_provider="google",
             google_sub=subject,
