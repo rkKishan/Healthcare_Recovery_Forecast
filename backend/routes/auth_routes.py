@@ -11,7 +11,19 @@ from ..errors import ApiError
 from ..google_auth import google_enabled, verify_google_token
 from ..models import User, db
 from ..ratelimit import limiter
-from ..roles import ADMIN, DEFAULT_ROLE, is_admin_email, public_roles, role_for_signup
+from ..roles import (
+    ADMIN,
+    ANALYST,
+    DEFAULT_ROLE,
+    DOCTOR,
+    demo_admin_role,
+    is_admin_email,
+    public_roles,
+    role_for_signup,
+)
+from ..roles import (
+    label as role_label,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -58,6 +70,46 @@ def _sync_admin(user: User) -> None:
     logger.info("Role for %s is now %s (from ADMIN_EMAILS).", user.email, user.role)
 
 
+def _demo_accounts() -> list[dict]:
+    """
+    The seeded demo logins the sign-in page may offer, empty unless this
+    deployment actually seeds them.
+
+    The page used to hard-code these. That meant the public landing page
+    advertised an administrator's address and password on a deployment where
+    seeding was off and the account did not exist -- naming a real admin
+    address to anyone who loaded the page, and inviting sign-ins that could
+    only fail. It also went stale the moment DEMO_PASSWORD was overridden.
+
+    Serving the password is only reasonable because it is a published demo
+    credential and this returns nothing at all once seeding is off.
+    """
+    if not current_app.config.get("SEED_DEMO_USERS"):
+        return []
+
+    seeded = (
+        (current_app.config["DEMO_DOCTOR_EMAIL"], DOCTOR),
+        (current_app.config["DEMO_ANALYST_EMAIL"], ANALYST),
+        (
+            current_app.config["DEMO_EMAIL"],
+            demo_admin_role(current_app.config.get("ADMIN_EMAILS")),
+        ),
+    )
+
+    accounts, seen = [], set()
+    for email, role in seeded:
+        address = str(email).strip().lower()
+        # The demo admin becomes a doctor once ADMIN_EMAILS is set, which would
+        # otherwise list the same role twice.
+        if not address or role in seen:
+            continue
+        seen.add(role)
+        accounts.append(
+            {"email": address, "role": role, "label": role_label(role)}
+        )
+    return accounts
+
+
 def _session(user: User, status: int = 200):
     _sync_admin(user)
     token, expires_in = create_token(user)
@@ -83,6 +135,12 @@ def config():
         "google_client_id": current_app.config.get("GOOGLE_CLIENT_ID") or None,
         "roles": public_roles(),
         "default_role": DEFAULT_ROLE,
+        "demo_accounts": _demo_accounts(),
+        "demo_password": (
+            current_app.config["DEMO_PASSWORD"]
+            if current_app.config.get("SEED_DEMO_USERS")
+            else None
+        ),
     }
 
 

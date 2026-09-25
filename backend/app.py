@@ -20,7 +20,11 @@ from flask_migrate import Migrate
 # launched from anywhere.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from .config import Config, verify_production_config  # noqa: E402
+from .config import (  # noqa: E402
+    Config,
+    resolve_demo_seeding,
+    verify_production_config,
+)
 from .errors import register_error_handlers  # noqa: E402
 from .models import User, db  # noqa: E402
 from .ratelimit import limiter, rate_limited  # noqa: E402
@@ -43,6 +47,12 @@ def create_app(config: type[Config] = Config) -> Flask:
     # Before anything is wired up: refuse to boot a production server that is
     # still signing tokens with a placeholder key.
     verify_production_config(config)
+
+    # Resolved once, here, so the seeder and /api/auth/config cannot disagree
+    # about whether demo logins exist.
+    app.config["SEED_DEMO_USERS"], note = resolve_demo_seeding(config)
+    if note:
+        logger.warning(note)
 
     _ensure_directories(app)
 
@@ -207,7 +217,7 @@ def _seed_demo_user(app: Flask) -> None:
     from sqlalchemy import inspect
 
     from .auth import hash_password
-    from .roles import ADMIN, ANALYST, DEFAULT_ROLE, DOCTOR
+    from .roles import ANALYST, DOCTOR, demo_admin_role
 
     if not app.config.get("SEED_DEMO_USERS", True):
         return
@@ -225,10 +235,12 @@ def _seed_demo_user(app: Flask) -> None:
     # three addresses would still boot with a fourth administrator whose
     # password is published in the README, recreated on every restart because
     # seeding runs on boot and only skips accounts that already exist.
-    demo_admin_role = DEFAULT_ROLE if app.config.get("ADMIN_EMAILS") else ADMIN
-
     accounts = (
-        (app.config["DEMO_EMAIL"], app.config["DEMO_NAME"], demo_admin_role),
+        (
+            app.config["DEMO_EMAIL"],
+            app.config["DEMO_NAME"],
+            demo_admin_role(app.config.get("ADMIN_EMAILS")),
+        ),
         (app.config["DEMO_DOCTOR_EMAIL"], app.config["DEMO_DOCTOR_NAME"], DOCTOR),
         (app.config["DEMO_ANALYST_EMAIL"], app.config["DEMO_ANALYST_NAME"], ANALYST),
     )

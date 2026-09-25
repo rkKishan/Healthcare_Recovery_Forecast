@@ -91,6 +91,10 @@ with the password **demo1234** (configurable in `.env`):
 | `analyst@hospital.org` | `/cohort` | upload extracts, bed forecast, model metrics, cohort PDF |
 | `admin@hospital.org` | `/caseload` | both |
 
+These exist for local use only. They share a password printed above, so a
+deployment that names its administrators in `ADMIN_EMAILS` stops seeding them
+and never seeds an admin -- see [Administrators](#administrators).
+
 As the analyst: **Upload data** → drop `data/sample_admissions.csv` → **View
 dashboard**. As the doctor: **Score a patient** → pick a preset → the admission
 joins the caseload with an expected discharge date.
@@ -306,6 +310,32 @@ resource scoping runs *before* the role check on dataset-scoped routes: a
 doctor probing another user's `dataset_id` gets the same 404 as for an id that
 was never issued, so the 403/404 difference cannot be used to confirm which
 datasets exist.
+
+### Administrators
+
+`admin` is granted by one server-side list and nothing else:
+
+```bash
+ADMIN_EMAILS=first@example.com,second@example.com,third@example.com
+```
+
+Editing that list is the whole interface. A listed address registers as an
+administrator; an account that already exists is promoted the next time it
+signs in, and removing an address demotes it the same way, so nobody has to
+touch the database. Matching is case-insensitive, and for a Google account it
+is the Google address that counts.
+
+Nothing in a request can reach it. `admin` is absent from the role picker, a
+registration claiming it falls back to the default, and every capability check
+reads the role from the database rather than from the token -- so a token
+issued before a demotion stops carrying admin with it.
+
+An empty list means unconfigured rather than "nobody is an administrator", so
+it changes no roles; that is what keeps the seeded demo admin working on a
+fresh checkout. Setting it has two side effects, both deliberate: the demo
+admin is seeded as a doctor instead, and the demo accounts stop being seeded
+at all, because seeding runs on every boot and would otherwise restore a
+published password after someone deleted those accounts.
 
 ### Google Sign-In
 

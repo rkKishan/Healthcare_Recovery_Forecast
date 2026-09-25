@@ -35,3 +35,6 @@ Thumbs.db
 # Stray copies some tools create alongside the real one
 node_modules */
 "node_modules 2"/
+
+# Local helper that prints live secrets to the terminal
+show-render-env.sh

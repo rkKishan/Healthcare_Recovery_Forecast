@@ -1207,16 +1207,6 @@ html:focus-within { scroll-behavior: smooth; }
   max-width: 48ch;
 }
 .lp-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
-.lp-demo-hint { margin-top: 20px; font-size: var(--text-sm); color: var(--lp-on-stage-dim); }
-.lp-demo-hint code {
-  background: var(--lp-glass);
-  border: 1px solid var(--lp-glass-border);
-  color: var(--lp-on-stage);
-  padding: 2px 7px;
-  border-radius: var(--radius-sm);
-  font-size: var(--text-code);
-}
-
 /* --- hero visual -------------------------------------------------------- */
 .lp-hero-visual { position: relative; }
 .lp-visual-card {

@@ -16,12 +16,15 @@ import { useDocumentTitle } from '../lib/title'
  * nothing on this page can escalate anyone.
  */
 
-const DEMO_ACCOUNTS = [
-  { email: 'doctor@hospital.org', label: 'Doctor', note: 'Caseload and per-patient scoring' },
-  { email: 'analyst@hospital.org', label: 'Analyst', note: 'Cohort capacity and model metrics' },
-  { email: 'admin@hospital.org', label: 'Admin', note: 'Both dashboards' },
-]
-const DEMO_PASSWORD = 'demo1234'
+// What each demo login is for. The addresses, the password, and whether any
+// exist at all come from /api/auth/config -- hard-coding them here meant this
+// page offered an administrator's credentials on a deployment that had turned
+// seeding off and deleted the account.
+const DEMO_NOTES = {
+  doctor: 'Caseload and per-patient scoring',
+  analyst: 'Cohort capacity and model metrics',
+  admin: 'Both dashboards',
+}
 
 const ROLE_ICONS = { doctor: 'patient', analyst: 'chart' }
 
@@ -33,8 +36,8 @@ export default function Login() {
   const [config, setConfig] = useState(null)
   const [role, setRole] = useState('doctor')
   const [fullName, setFullName] = useState('')
-  const [email, setEmail] = useState('doctor@hospital.org')
-  const [password, setPassword] = useState(DEMO_PASSWORD)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
   const [busy, setBusy] = useState(false)
 
@@ -44,6 +47,13 @@ export default function Login() {
       .then((data) => {
         setConfig(data)
         if (data.default_role) setRole(data.default_role)
+        // Only a deployment that actually seeds demo logins gets a filled-in
+        // form; everywhere else both fields stay empty.
+        const [first] = data.demo_accounts || []
+        if (first && data.demo_password) {
+          setEmail(first.email)
+          setPassword(data.demo_password)
+        }
       })
       // A server that cannot answer this still supports password login, so
       // the form stays usable; only the Google button goes missing.
@@ -51,6 +61,7 @@ export default function Login() {
   }, [])
 
   const registering = mode === 'register'
+  const demoAccounts = (config?.demo_password && config?.demo_accounts) || []
 
   useDocumentTitle(registering ? 'Create an account' : 'Sign in')
 
@@ -88,7 +99,7 @@ export default function Login() {
   function fillFromDemo(account) {
     setMode('signin')
     setEmail(account.email)
-    setPassword(DEMO_PASSWORD)
+    setPassword(config?.demo_password || '')
     setError(null)
   }
 
@@ -284,25 +295,27 @@ export default function Login() {
             )}
           </button>
 
-          <div className="demo-note">
-            <div className="xs muted" style={{ marginBottom: 8 }}>
-              Demo accounts — password <code>{DEMO_PASSWORD}</code>
+          {demoAccounts.length > 0 && (
+            <div className="demo-note">
+              <div className="xs muted" style={{ marginBottom: 8 }}>
+                Demo accounts — password <code>{config.demo_password}</code>
+              </div>
+              <div className="demo-accounts">
+                {demoAccounts.map((account) => (
+                  <button
+                    key={account.email}
+                    type="button"
+                    className="demo-account"
+                    onClick={() => fillFromDemo(account)}
+                    title={`Fill the form with ${account.email}`}
+                  >
+                    <strong>{account.label}</strong>
+                    <span className="xs muted">{DEMO_NOTES[account.role]}</span>
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="demo-accounts">
-              {DEMO_ACCOUNTS.map((account) => (
-                <button
-                  key={account.email}
-                  type="button"
-                  className="demo-account"
-                  onClick={() => fillFromDemo(account)}
-                  title={`Fill the form with ${account.email}`}
-                >
-                  <strong>{account.label}</strong>
-                  <span className="xs muted">{account.note}</span>
-                </button>
-              ))}
-            </div>
-          </div>
+          )}
         </form>
       </main>
     </div>

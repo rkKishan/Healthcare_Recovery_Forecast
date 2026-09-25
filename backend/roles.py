@@ -140,6 +140,18 @@ def role_for_signup(email: object, requested: object) -> str:
     return coerce_signup_role(requested)
 
 
+def demo_admin_role(admin_emails: object) -> str:
+    """
+    The role the seeded demo administrator gets.
+
+    Admin only while a deployment has not named its real administrators: the
+    demo accounts share one published password, so once ADMIN_EMAILS is set
+    that list is the only thing granting admin. Kept here so the seeder and
+    the sign-in page's account list cannot drift apart about it.
+    """
+    return DEFAULT_ROLE if admin_emails else ADMIN
+
+
 def label(role: str) -> str:
     return ROLE_LABELS.get(normalise(role) or "", "User")
 

@@ -160,9 +160,39 @@ class Config:
     DEMO_ANALYST_NAME = os.getenv("DEMO_ANALYST_NAME", "Jordan Mehta")
 
     # These accounts share one published password, which is fine for a demo
-    # and not fine anywhere real. Set SEED_DEMO_USERS=false in a deployment
-    # that has actual users.
+    # and not fine anywhere real, so a deployment that has named its real
+    # administrators in ADMIN_EMAILS does not seed them -- see
+    # `resolve_demo_seeding`, which applies that at app creation because a
+    # subclass may override either setting after this body has run.
+    #
+    # Tracking whether the variable was set at all keeps that default from
+    # overruling someone who asked for seeding on purpose.
     SEED_DEMO_USERS = os.getenv("SEED_DEMO_USERS", "true").lower() == "true"
+    SEED_DEMO_USERS_EXPLICIT = "SEED_DEMO_USERS" in os.environ
+
+
+def resolve_demo_seeding(config: type[Config]) -> tuple[bool, str | None]:
+    """
+    Whether to seed the demo logins, and a line to log if the answer changed.
+
+    Seeding runs on every boot and only skips accounts that already exist, so
+    on a real deployment it is not merely untidy -- it puts the published
+    password back after anyone deletes it. Naming real administrators is the
+    clearest possible signal that a deployment is real, so that turns seeding
+    off, and deleting the demo accounts then sticks.
+
+    A deliberate SEED_DEMO_USERS still wins either way: the zero-setup Docker
+    demo runs with debug off and no ADMIN_EMAILS, and keeps its logins.
+    """
+    if not config.SEED_DEMO_USERS or config.SEED_DEMO_USERS_EXPLICIT:
+        return config.SEED_DEMO_USERS, None
+    if config.DEBUG or not config.ADMIN_EMAILS:
+        return True, None
+    return False, (
+        "Not seeding the demo accounts: ADMIN_EMAILS names this deployment's "
+        "administrators, and the demo logins share a published password. Set "
+        "SEED_DEMO_USERS=true to keep them anyway."
+    )
 
 
 def sqlite_in_use() -> bool:

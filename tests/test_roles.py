@@ -363,3 +363,38 @@ class TestAdminAllowlist:
     ):
         """A fresh checkout keeps both dashboards openable without setup."""
         assert self._booted(tmp_path, []) == ADMIN
+
+    def test_the_sign_in_page_is_told_of_no_demo_logins_when_seeding_is_off(
+        self, tmp_path
+    ):
+        """
+        The page used to hard-code an admin address and password, so it
+        advertised an account a locked-down deployment had deleted.
+        """
+        from backend.app import create_app
+        from backend.models import db
+        from tests.conftest import TestConfig
+
+        class _Config(TestConfig):
+            UPLOAD_DIR = tmp_path / "uploads"
+            SEED_DEMO_USERS = False
+
+        application = create_app(_Config)
+        body = application.test_client().get("/api/auth/config").get_json()
+        with application.app_context():
+            db.session.remove()
+            db.drop_all()
+
+        assert body["demo_accounts"] == []
+        assert body["demo_password"] is None
+
+    def test_the_offered_demo_logins_match_what_was_seeded(self, client, app):
+        """No admin among them once the allowlist is in force."""
+        app.config["ADMIN_EMAILS"] = ["boss@hospital.org"]
+        body = client.get("/api/auth/config").get_json()
+
+        assert body["demo_password"] == app.config["DEMO_PASSWORD"]
+        assert ADMIN not in {a["role"] for a in body["demo_accounts"]}
+        assert app.config["DEMO_EMAIL"].lower() not in {
+            a["email"] for a in body["demo_accounts"]
+        }

@@ -362,10 +362,6 @@ export default function Landing() {
                     How it works
                   </a>
                 </div>
-
-                <p className="lp-demo-hint">
-                  Demo account — <code>admin@hospital.org</code> / <code>demo1234</code>
-                </p>
               </AnimatedContent>
             </div>
 
