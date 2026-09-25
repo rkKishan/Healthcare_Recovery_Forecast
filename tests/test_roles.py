@@ -321,3 +321,45 @@ class TestAdminAllowlist:
             json={"email": "boss@hospital.org", "password": "a-good-password"},
         ).get_json()
         assert body["user"]["role"] == ADMIN
+
+    # --- the seeded demo administrator ---------------------------------
+    # Seeding runs on every boot and only skips accounts that already exist,
+    # so deleting the demo admin from a live database is not a fix by itself:
+    # the next restart puts it back. These two pin the rule that closes that
+    # hole -- the allowlist, once configured, is the only source of admin.
+
+    @staticmethod
+    def _booted(tmp_path, admin_emails):
+        """A freshly created app, since seeding happens inside create_app."""
+        from backend.app import create_app
+        from backend.models import User, db
+        from tests.conftest import TestConfig
+
+        class _Config(TestConfig):
+            UPLOAD_DIR = tmp_path / "uploads"
+            ADMIN_EMAILS = admin_emails
+
+        application = create_app(_Config)
+        with application.app_context():
+            demo = User.query.filter_by(
+                email=application.config["DEMO_EMAIL"].lower()
+            ).first()
+            role = demo.role if demo else None
+            db.session.remove()
+            db.drop_all()
+        return role
+
+    def test_the_demo_admin_is_not_seeded_as_admin_once_the_list_is_set(
+        self, tmp_path
+    ):
+        """
+        The published demo password must not reach an admin account on a
+        deployment that has named its real administrators.
+        """
+        assert self._booted(tmp_path, ["boss@hospital.org"]) == DEFAULT_ROLE
+
+    def test_the_demo_admin_still_works_on_an_unconfigured_deployment(
+        self, tmp_path
+    ):
+        """A fresh checkout keeps both dashboards openable without setup."""
+        assert self._booted(tmp_path, []) == ADMIN

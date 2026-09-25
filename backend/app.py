@@ -199,11 +199,15 @@ def _seed_demo_user(app: Flask) -> None:
     """
     Create one demo login per role on first run, so both dashboards can be
     opened on a fresh checkout without registering first.
+
+    These accounts share one published password, so the administrator among
+    them is only created as an administrator on a deployment that has not
+    named its real ones. See `accounts` below.
     """
     from sqlalchemy import inspect
 
     from .auth import hash_password
-    from .roles import ADMIN, ANALYST, DOCTOR
+    from .roles import ADMIN, ANALYST, DEFAULT_ROLE, DOCTOR
 
     if not app.config.get("SEED_DEMO_USERS", True):
         return
@@ -215,8 +219,16 @@ def _seed_demo_user(app: Flask) -> None:
         logger.info("Users table not present yet; skipping demo seed.")
         return
 
+    # Once ADMIN_EMAILS names real administrators, that list is the only thing
+    # that grants admin -- so the demo account drops to the default clinical
+    # role. Without this, a deployment that had carefully locked admin down to
+    # three addresses would still boot with a fourth administrator whose
+    # password is published in the README, recreated on every restart because
+    # seeding runs on boot and only skips accounts that already exist.
+    demo_admin_role = DEFAULT_ROLE if app.config.get("ADMIN_EMAILS") else ADMIN
+
     accounts = (
-        (app.config["DEMO_EMAIL"], app.config["DEMO_NAME"], ADMIN),
+        (app.config["DEMO_EMAIL"], app.config["DEMO_NAME"], demo_admin_role),
         (app.config["DEMO_DOCTOR_EMAIL"], app.config["DEMO_DOCTOR_NAME"], DOCTOR),
         (app.config["DEMO_ANALYST_EMAIL"], app.config["DEMO_ANALYST_NAME"], ANALYST),
     )

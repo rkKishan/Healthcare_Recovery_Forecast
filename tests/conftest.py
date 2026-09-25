@@ -43,6 +43,11 @@ class TestConfig(Config):
     GOOGLE_ALLOWED_DOMAINS: list[str] = []
     ASSISTANT_API_KEY = ""
 
+    # Same reasoning, and it decides a role: a developer who has locked admin
+    # down to their own address would otherwise find the seeded demo admin
+    # arriving as a doctor, failing every test that expects both dashboards.
+    ADMIN_EMAILS: list[str] = []
+
 
 @pytest.fixture
 def app(tmp_path):
