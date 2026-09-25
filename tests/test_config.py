@@ -53,3 +53,48 @@ class TestProductionGuard:
 
         verify_production_config(candidate)
         assert any("SQLite" in message for message in caplog.messages)
+
+
+class TestDatabaseUrlNormalisation:
+    """
+    A Postgres URL without a driver must not reach SQLAlchemy unchanged.
+
+    Every managed provider hands out `postgresql://`, SQLAlchemy reads that
+    as psycopg2, and this project ships psycopg 3 -- so the app died at
+    db.init_app with ModuleNotFoundError after a build that looked healthy.
+    """
+
+    @staticmethod
+    def _uri(value):
+        import importlib
+        import os
+
+        import backend.config as config
+
+        previous = os.environ.get("DATABASE_URL")
+        os.environ["DATABASE_URL"] = value
+        try:
+            importlib.reload(config)
+            return config.Config.SQLALCHEMY_DATABASE_URI
+        finally:
+            if previous is None:
+                os.environ.pop("DATABASE_URL", None)
+            else:
+                os.environ["DATABASE_URL"] = previous
+            importlib.reload(config)
+
+    def test_a_driverless_postgres_url_gets_psycopg(self):
+        uri = self._uri("postgresql://u:p@host.neon.tech/neondb?sslmode=require")
+        assert uri.startswith("postgresql+psycopg://")
+        # The rest of the URL must survive intact -- credentials, host, query.
+        assert uri.endswith("u:p@host.neon.tech/neondb?sslmode=require")
+
+    def test_the_legacy_postgres_scheme_is_handled_too(self):
+        assert self._uri("postgres://u:p@h/db").startswith("postgresql+psycopg://")
+
+    def test_an_explicit_driver_is_left_alone(self):
+        for url in (
+            "postgresql+psycopg://u:p@h/db",
+            "mysql+pymysql://u:p@h/db",
+        ):
+            assert self._uri(url) == url

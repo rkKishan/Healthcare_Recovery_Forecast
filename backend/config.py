@@ -21,14 +21,28 @@ def _resolve(path_like: str | Path) -> Path:
 
 def _database_uri() -> str:
     """
-    Build the SQLAlchemy URI, anchoring relative SQLite paths to the repo root.
+    Build the SQLAlchemy URI, normalising the two forms that bite in practice.
 
-    `sqlite:///data/app.db` in .env is relative to the working directory, which
-    breaks whenever the server is started from anywhere but the project root.
+    A relative SQLite path -- `sqlite:///data/app.db` -- is relative to the
+    working directory, which breaks whenever the server starts from anywhere
+    but the project root, so it is anchored here instead.
+
+    A Postgres URL without a driver is worse, because it fails only in
+    deployment. Every managed provider hands out `postgresql://...` (or the
+    older `postgres://`), and SQLAlchemy reads a driverless Postgres URL as
+    psycopg2. This project ships psycopg 3, so that URL imports a module that
+    is not installed and the app dies at `db.init_app`, after a build that
+    looked entirely healthy. Naming the driver here means a connection string
+    can be pasted from Neon or Render exactly as given.
     """
     url = os.getenv("DATABASE_URL")
     if not url:
         return f"sqlite:///{BASE_DIR / 'data' / 'app.db'}"
+
+    # postgres:// is the legacy spelling several providers still emit.
+    for prefix in ("postgresql://", "postgres://"):
+        if url.startswith(prefix):
+            return f"postgresql+psycopg://{url[len(prefix):]}"
 
     prefix = "sqlite:///"
     if url.startswith(prefix):
